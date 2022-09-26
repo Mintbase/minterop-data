@@ -1,0 +1,16 @@
+table:
+  schema: mb_views
+  name: nft_metadata_unburned
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - metadata_id
+        - title
+        - description
+        - media
+        - nft_contract_id
+        - minted_timestamp
+        - price
+      filter: {}
+      allow_aggregations: true

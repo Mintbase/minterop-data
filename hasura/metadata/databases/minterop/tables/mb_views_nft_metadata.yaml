@@ -1,0 +1,26 @@
+table:
+  schema: mb_views
+  name: nft_metadata
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - nft_contract_is_mintbase
+        - reference_blob
+        - base_uri
+        - description
+        - extra
+        - id
+        - media
+        - media_hash
+        - nft_contract_id
+        - nft_contract_icon
+        - nft_contract_name
+        - nft_contract_owner_id
+        - nft_contract_reference
+        - nft_contract_spec
+        - nft_contract_symbol
+        - title
+        - nft_contract_created_at
+      filter: {}
+      allow_aggregations: true

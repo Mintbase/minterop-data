@@ -1,0 +1,10 @@
+table:
+  schema: public
+  name: blocks
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - synced_height
+      filter: {}
+      allow_aggregations: true

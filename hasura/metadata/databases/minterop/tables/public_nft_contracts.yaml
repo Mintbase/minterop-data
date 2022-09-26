@@ -1,0 +1,21 @@
+table:
+  schema: public
+  name: nft_contracts
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - is_mintbase
+        - id
+        - base_uri
+        - created_receipt_id
+        - icon
+        - name
+        - owner_id
+        - reference
+        - reference_hash
+        - spec
+        - symbol
+        - created_at
+      filter: {}
+      allow_aggregations: true

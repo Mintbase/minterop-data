@@ -1,0 +1,29 @@
+[package]
+name = "minterop-common"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "minterop_common"
+path = "src/lib.rs"
+
+[dependencies]
+# no-boilerplate error forwarding
+anyhow = "1.0.57"
+# allowing arbitrary precision database tables
+bigdecimal = "0.1.2"
+# Timestamps
+chrono = "0.4.19"
+# embedding migrations into binary
+diesel_migrations = "1.4.0"
+# allows using u128 with `bigdecimal`
+num-bigint = "0.2.6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1.0.81"
+
+# diesel handles the database connection
+[dependencies.diesel]
+version = "1.4.8"
+# postgres because it's our DB, r2d2 handles pooled connections, chrono for
+# timestamps, serde_json to insert jsonb types
+features = ["postgres", "r2d2", "chrono", "serde_json", "numeric"]

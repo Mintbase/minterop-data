@@ -1,0 +1,41 @@
+table:
+  schema: public
+  name: nft_tokens
+object_relationships:
+  - name: nft_contracts
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - copies
+        - royalties_percent
+        - royalties
+        - splits
+        - burned_receipt_id
+        - last_transfer_receipt_id
+        - metadata_id
+        - minted_receipt_id
+        - minter
+        - mint_memo
+        - nft_contract_id
+        - owner
+        - reference
+        - reference_hash
+        - token_id
+        - burned_timestamp
+        - expires_at
+        - issued_at
+        - last_transfer_timestamp
+        - minted_timestamp
+        - starts_at
+        - updated_at
+      filter: {}
+      allow_aggregations: true

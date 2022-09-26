@@ -1,0 +1,28 @@
+table:
+  schema: mb_views
+  name: active_listings
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - copies
+        - reference_blob
+        - currency
+        - description
+        - extra
+        - kind
+        - listed_by
+        - media
+        - minter
+        - nft_contract_id
+        - price
+        - receipt_id
+        - reference
+        - title
+        - token_id
+        - created_at
+        - market_id
+        - approval_id
+        - metadata_id
+      filter: {}
+      allow_aggregations: true

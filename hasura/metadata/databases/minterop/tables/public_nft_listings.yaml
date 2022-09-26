@@ -1,0 +1,23 @@
+table:
+  schema: public
+  name: nft_listings
+object_relationships:
+  - name: nft_contracts
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+# allow selection for stats queries.
+# TODO: make a view instead
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - nft_contract_id
+        - accepted_at
+      filter: {}
+      allow_aggregations: true

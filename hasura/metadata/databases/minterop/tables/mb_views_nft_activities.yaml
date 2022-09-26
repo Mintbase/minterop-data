@@ -1,0 +1,26 @@
+table:
+  schema: mb_views
+  name: nft_activities
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - copies
+        - action_receiver
+        - action_sender
+        - description
+        - extra
+        - kind
+        - media
+        - media_hash
+        - nft_contract_id
+        - price
+        - receipt_id
+        - reference
+        - reference_hash
+        - title
+        - token_id
+        - tx_sender
+        - timestamp
+      filter: {}
+      allow_aggregations: true

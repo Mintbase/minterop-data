@@ -1,0 +1,10 @@
+.idea
+/target
+**/.env
+**/*.log
+**node_modules
+.github/workflows/testnet.yaml
+sa-keyfile.json
+tmp.txt
+*.env
+.DS_Store

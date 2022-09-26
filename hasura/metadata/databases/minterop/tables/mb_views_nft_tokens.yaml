@@ -1,0 +1,46 @@
+table:
+  schema: mb_views
+  name: nft_tokens
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - copies
+        - nft_contract_is_mintbase
+        - royalties_percent
+        - reference_blob
+        - royalties
+        - splits
+        - base_uri
+        - burned_receipt_id
+        - description
+        - extra
+        - last_transfer_receipt_id
+        - media
+        - media_hash
+        - metadata_id
+        - minted_receipt_id
+        - minter
+        - mint_memo
+        - nft_contract_id
+        - nft_contract_icon
+        - nft_contract_name
+        - nft_contract_owner_id
+        - nft_contract_reference
+        - nft_contract_spec
+        - nft_contract_symbol
+        - owner
+        - reference
+        - reference_hash
+        - title
+        - token_id
+        - burned_timestamp
+        - expires_at
+        - issued_at
+        - last_transfer_timestamp
+        - minted_timestamp
+        - nft_contract_created_at
+        - starts_at
+        - updated_at
+      filter: {}
+      allow_aggregations: true

@@ -1,0 +1,29 @@
+table:
+  schema: public
+  name: nft_activities
+object_relationships:
+  - name: nft_contracts
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - action_receiver
+        - action_sender
+        - kind
+        - memo
+        - nft_contract_id
+        - price
+        - receipt_id
+        - token_id
+        - tx_sender
+        - timestamp
+      filter: {}
+      allow_aggregations: true
