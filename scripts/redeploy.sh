@@ -7,9 +7,6 @@ grant select on all tables in schema mb_views to hasura;
 grant select on all sequences in schema mb_views to hasura;
 grant usage on schema mb_views to hasura;
 EOF
-
-  source "$network.env" || exit 1
-  cd minterop-common || exit 1
   # revert creating views
   DATABASE_URL="$POSTGRES" diesel migration revert || exit 1
   # revert creating database itself
