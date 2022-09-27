@@ -17,3 +17,4 @@ RUN cargo chef cook --release --recipe-path recipe.json
 COPY minterop-common/Cargo.toml      minterop-common/Cargo.toml
 COPY minterop-common/migrations      minterop-common/migrations
 COPY minterop-common/src             minterop-common/src
+COPY Cargo.lock Cargo.toml ./
