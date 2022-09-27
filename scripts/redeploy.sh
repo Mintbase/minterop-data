@@ -8,13 +8,6 @@ grant select on all sequences in schema mb_views to hasura;
 grant usage on schema mb_views to hasura;
 EOF
 
-# Stop indexing while doing migrations, otherwise good chances of DB corruption
-# between migration and indexer redeployment
-gcloud compute instances delete "interop-indexer-$network" -q \
-  --project=omni-cloud-1 \
-  --zone=europe-west1-b
-
-(
   source "$network.env" || exit 1
   cd minterop-common || exit 1
   # revert creating views

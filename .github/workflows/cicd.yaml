@@ -1,4 +1,4 @@
-name: Minterop CICD
+name: CommonHasuraCICD
 
 on:
   push:
@@ -6,41 +6,11 @@ on:
       - main
 
 jobs:
-  workspace:
-    runs-on: ubuntu-22.04
-    name: Build minterop commons workspace
-    steps:
-      # Check out code
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      # Authenticate/setup gcloud
-      - id: "auth"
-        uses: "google-github-actions/auth@v0"
-        with:
-          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
-
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v0"
-
-      - name: "Set up docker auth"
-        run: gcloud auth configure-docker
-
-      # Build and push docker image
-      - name: "Build Workspace Image & Push"
-        run: |
-          docker build \
-            -t gcr.io/omni-cloud-1/minterop-workspace:${GITHUB_SHA::6} \
-            -t gcr.io/omni-cloud-1/minterop-workspace:latest \
-            .
-          docker push gcr.io/omni-cloud-1/minterop-workspace:${GITHUB_SHA::6}
-          docker push gcr.io/omni-cloud-1/minterop-workspace:latest
-
   # this is a full redeploy! in perspective, this should do DB migratons, and
   # then just start from the current block height
   deploy:
     runs-on: ubuntu-22.04
-    name: Deploy and run indexer
+    name: Diesel and Hasura setup
     steps:
       - name: Check out code
         uses: actions/checkout@v2
