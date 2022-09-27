@@ -8,3 +8,4 @@ sa-keyfile.json
 tmp.txt
 *.env
 .DS_Store
+**target
