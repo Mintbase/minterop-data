@@ -9,7 +9,6 @@ grant usage on schema mb_views to hasura;
 EOF
 
   source "$network.env" || exit 1
-  cd minterop-common || exit 1
   # revert creating views
   DATABASE_URL="$POSTGRES" diesel migration revert || exit 1
   # revert creating database itself
