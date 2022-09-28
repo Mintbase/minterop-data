@@ -17,7 +17,7 @@ DATABASE_URL="$POSTGRES" diesel migration run || exit 1
 
 # hasura project reload metadata
 (
-  cd ../hasura || exit 1
+  cd hasura || exit 1
   hasura metadata apply --envfile "../$network.env"
 ) || exit 1
 
