@@ -88,6 +88,7 @@ table! {
         unlisted_at -> Nullable<Timestamp>,
         accepted_at -> Nullable<Timestamp>,
         accepted_offer_id -> Nullable<Int8>,
+        metadata_id -> Nullable<Text>,
     }
 }
 
@@ -103,6 +104,8 @@ table! {
         reference -> Nullable<Text>,
         reference_hash -> Nullable<Text>,
         extra -> Nullable<Text>,
+        minter -> Nullable<Text>,
+        base_uri -> Nullable<Text>,
     }
 }
 

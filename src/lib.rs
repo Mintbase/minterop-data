@@ -16,16 +16,7 @@ where
     num_bigint::BigInt: From<N>,
 {
     bigdecimal::BigDecimal::from(num_bigint::BigInt::from(x))
-} 
-
-// #[macro_export]
-// macro_rules! run_embedded_migrations {
-//     ($loc:expr, $pg:expr) => {
-//         diesel_migrations::embed_migrations!($loc);
-
-//         $crate::run_migrations($pg)
-//     };
-// }
+}
 
 diesel_migrations::embed_migrations!("./migrations");
 
