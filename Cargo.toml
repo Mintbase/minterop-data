@@ -1,10 +1,10 @@
 [package]
-name = "minterop-common"
+name = "minterop-data"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "minterop_common"
+name = "minterop_data"
 path = "src/lib.rs"
 
 [dependencies]
