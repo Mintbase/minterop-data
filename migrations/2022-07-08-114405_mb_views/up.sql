@@ -146,6 +146,7 @@ select
 	m.media,
 	t.nft_contract_id,
 	t.minted_timestamp,
+  t.minter,
 	l.price
 from nft_metadata m
 left join (
@@ -165,4 +166,16 @@ select
 	l.price
 from nft_tokens t
 left join mb_views.active_listings l on l.nft_contract_id=t.nft_contract_id
-where t.burned_timestamp is null
+where t.burned_timestamp is null;
+
+create view mb_views.top_stores as
+select nft_contract_id, date, sum(amount) as total
+from (
+	select
+	    nft_contract_id,
+    	amount,
+	    date_trunc('month', timestamp) as date
+	from nft_earnings
+) as sales
+group by (date, nft_contract_id)
+order by date desc, total desc;

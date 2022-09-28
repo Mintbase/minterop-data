@@ -3,7 +3,7 @@ use chrono::NaiveDateTime;
 
 // ----------------------- core/interop functionality ----------------------- //
 use crate::schema::*;
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, Clone)]
 pub struct NftToken {
     pub token_id: String,
     pub nft_contract_id: String,
@@ -86,6 +86,8 @@ pub struct NftMetadata {
     // pub animation_type: Option<String>,
     // pub tags: Option<serde_json::Value>,
     pub extra: Option<String>,
+    pub minter: Option<String>,
+    pub base_uri: Option<String>,
 }
 
 impl NftMetadata {
@@ -120,6 +122,8 @@ impl NftMetadata {
             // starts_at: None,
             // updated_at: None,
             extra: None,
+            minter: None,   // FIXME: make sure this is always added
+            base_uri: None, // FIXME: make sure this is always added
         }
     }
 
@@ -209,6 +213,7 @@ pub struct NftListing {
     pub unlisted_at: Option<NaiveDateTime>,
     pub accepted_at: Option<NaiveDateTime>,
     pub accepted_offer_id: Option<i64>,
+    pub metadata_id: String,
 }
 
 pub const NFT_LISTING_KIND_SIMPLE: &str = "simple";

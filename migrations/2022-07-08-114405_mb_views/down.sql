@@ -1,3 +1,4 @@
+drop view mb_views.top_stores;
 drop view mb_views.nft_tokens_with_listing;
 drop view mb_views.nft_metadata_unburned;
 drop view mb_views.nft_activities;
