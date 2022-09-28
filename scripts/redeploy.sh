@@ -9,10 +9,7 @@ grant usage on schema mb_views to hasura;
 EOF
 
   source "$network.env" || exit 1
-  # revert creating views
-  DATABASE_URL="$POSTGRES" diesel migration revert || exit 1
-  # revert creating database itself
-  DATABASE_URL="$POSTGRES" diesel migration revert || exit 1
+
   # create the schema
   DATABASE_URL="$POSTGRES" diesel migration run || exit 1
 
