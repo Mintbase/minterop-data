@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
@@ -13,8 +10,6 @@ pub enum RpcMessage {
     HandleTokenPayload {
         contract_id: String,
         token_ids: Vec<String>,
-        refresh: Option<bool>,
-        minter: Option<String>,
     },
 }
 
@@ -22,16 +17,10 @@ impl RpcMessage {
     pub fn from_contract(contract_id: String) -> Self {
         Self::HandleContractPayload { contract_id }
     }
-    pub fn from_token(
-        contract_id: String,
-        token_ids: Vec<String>,
-        minter: Option<String>,
-    ) -> Self {
+    pub fn from_token(contract_id: String, token_ids: Vec<String>) -> Self {
         Self::HandleTokenPayload {
             contract_id,
             token_ids,
-            refresh: Some(false),
-            minter,
         }
     }
 }
@@ -39,10 +28,7 @@ impl RpcMessage {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::rpc_payloads::RpcMessage::{
-        HandleContractPayload,
-        HandleTokenPayload,
-    };
+    use crate::rpc_payloads::RpcMessage::{HandleContractPayload, HandleTokenPayload};
     const CONTRACT_PAYLOAD_STR: &str =
         r#"{"kind":"contract","payload":{"contract_id":"foo.near"}}"#;
     const TOKEN_PAYLOAD_STR: &str = r#"{"kind":"token","payload":{"contract_id":"foo.near","token_ids":["bar"],"refresh":null,"minter":"foo.near"}}"#;
@@ -51,8 +37,6 @@ mod tests {
         HandleTokenPayload {
             contract_id: "foo.near".to_string(),
             token_ids: vec!["bar".to_string()],
-            refresh: None,
-            minter: Some("foo.near".to_string()),
         }
     }
 
