@@ -63,7 +63,7 @@ jobs:
       - name: Diesel setup
         # TODO: use precompiled once feasible (https://github.com/diesel-rs/diesel/issues/2379)
         run: |
-          sudo apt-get install libpq-dev && cargo install diesel_cli
+          sudo apt-get install libpq-dev && cargo install --debug diesel_cli --no-default-features --features postgres
 
       # - name: Hasura setup
       #   run: |
