@@ -26,18 +26,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      # # Authenticate/setup gcloud
-      # - id: "auth"
-      #   uses: "google-github-actions/auth@v0"
-      #   with:
-      #     credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
-
-      # - name: Rust setup
-      #   uses: actions-rs/toolchain@v1
-      #   with:
-      #     toolchain: stable
-      #     default: true
-      #     override: true
+      - name: Rust setup
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          default: true
+          override: true
 
       # - name: shftmt setup
       # - uses: mfinelli/setup-shfmt@v1
