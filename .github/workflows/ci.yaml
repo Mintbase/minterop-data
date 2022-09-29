@@ -9,18 +9,18 @@ jobs:
   ci:
     name: Continuous integration
     runs-on: ubuntu-22.04
-    # services:
-    #   postgres:
-    #     image: postgres:14
-    #     env:
-    #       POSTGRES_USER: postgres
-    #       POSTGRES_PASSWORD: postgres
-    #       POSTGRES_DB: minterop
-    #     ports:
-    #       - 5432:5432
-    #     options:
-    #       --health-cmd pg_isready --health-interval 3s --health-timeout 5s
-    #       --health-retries 3
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: minterop
+        ports:
+          - 5432:5432
+        options:
+          --health-cmd pg_isready --health-interval 3s --health-timeout 5s
+          --health-retries 3
 
     steps:
       - name: Check out code
@@ -58,16 +58,16 @@ jobs:
         run: |
           cargo clippy -- -D warnings
 
-      # - name: Diesel setup
-      #   run: |
-      #     sudo apt-get install libpq-dev && cargo install diesel_cli
+      - name: Diesel setup
+        run: |
+          sudo apt-get install libpq-dev && cargo install diesel_cli
 
       # - name: Hasura setup
       #   run: |
       #     sudo apt-get install curl
       #     curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
 
-      # - name: Smoke tests
-      #   # TODO: check if hasura migrations + hasura ic list
-      #   run: |
-      #     DATABASE_URL=postgres://postgres:postgres@postgres:5432/minterop diesel migration run
+      - name: Smoke tests
+        # TODO: check if hasura migrations + hasura ic list
+        run: |
+          DATABASE_URL=postgres://postgres:postgres@postgres:5432/minterop diesel migration run
