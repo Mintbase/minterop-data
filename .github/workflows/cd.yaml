@@ -10,7 +10,7 @@ jobs:
   # then just start from the current block height
   deploy:
     runs-on: ubuntu-22.04
-    name: Diesel and Hasura setup
+    name: Diesel and Hasura migrations
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -37,14 +37,8 @@ jobs:
           sudo apt-get install curl
           curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
 
-      # get secrets from GH
-      # TODO: currently a problem for CD: this defines the block height
-      # -> only good for redeploy + sandbox
       - name: Redeployment script
-        # TODO: use commit hash again
+        # TODO: once stable, run testnet redeployment as well
         run: |
           echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
           scripts/redeploy.sh sandbox latest
-        # run: |
-        #   echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
-        #   scripts/redeploy.sh sandbox ${GITHUB_SHA::6}

@@ -1,0 +1,78 @@
+name: CommonHasuraCICD
+
+on:
+  pull_request:
+
+jobs:
+  # this is a full redeploy! in perspective, this should do DB migratons, and
+  # then just start from the current block height
+  ci:
+    name: Continuous integration
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: minterop
+        ports:
+          - 5432:5432
+        options:
+          --health-cmd pg_isready --health-interval 3s --health-timeout 5s
+          --health-retries 3
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Authenticate/setup gcloud
+      - id: "auth"
+        uses: "google-github-actions/auth@v0"
+        with:
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+
+      - name: Rust setup
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          default: true
+          override: true
+
+      - name: shftmt setup
+      - uses: mfinelli/setup-shfmt@v1
+
+      - name: shellcheck setup
+      - uses: mfinelli/setup-shfmt@v1
+
+      - name: taplo setup
+      - run: cargo install taplo-cli
+
+      - name: Prettier setup
+      - run: sudo apt-get install npm && npm install --global prettier
+
+      - name: Diesel setup
+        run: |
+          sudo apt-get install libpq-dev && cargo install diesel_cli
+
+      # - name: Hasura setup
+      #   run: |
+      #     sudo apt-get install curl
+      #     curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+
+      - name: Formatting
+        run: |
+          cargo +nightly fmt -- --check
+          shfmt -i 2 -d .
+          taplo fmt **/*.toml --check
+          prettier . --check
+
+      - name: Linting
+        # TODO: shellcheck (https://github.com/marketplace/actions/shellcheck)
+        run: |
+          cargo clippy -- -D warnings
+
+      - name: Smoke tests
+        # TODO: check if hasura migrations + hasura ic list
+        run: |
+          DATABASE_URL=postgres://postgres:postgres@postgres:5432/minterop diesel migration run
