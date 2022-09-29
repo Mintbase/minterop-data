@@ -42,7 +42,8 @@ jobs:
 
       - name: taplo setup
         # TODO: use precompiled if available (https://github.com/tamasfe/taplo/issues/326)
-        run: cargo install taplo-cli
+        # --debug to speed up the install
+        run: cargo install --debug taplo-cli
 
       - name: Prettier setup
         run: sudo apt-get install npm && npm install --global prettier
