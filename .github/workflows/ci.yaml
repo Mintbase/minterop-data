@@ -29,7 +29,7 @@ jobs:
       - name: Rust setup
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: nightly # TODO: back to stable once fmt features are stable
           default: true
           override: true
 
