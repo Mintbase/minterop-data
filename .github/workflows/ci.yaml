@@ -13,8 +13,8 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: pgpw
           POSTGRES_DB: minterop
         ports:
           - 5432:5432
@@ -70,4 +70,4 @@ jobs:
       - name: Smoke tests
         # TODO: check if hasura migrations + hasura ic list
         run: |
-          DATABASE_URL=postgres://postgres:postgres@postgres:5432/minterop diesel migration run
+          DATABASE_URL=postgres://root:pgpw@postgres:5432/minterop diesel migration run
