@@ -34,37 +34,37 @@ jobs:
           override: true
 
       - name: shftmt setup
-      - uses: mfinelli/setup-shfmt@v1
+        uses: mfinelli/setup-shfmt@v1
 
-      # - name: shellcheck setup
-      # - uses: mfinelli/setup-shfmt@v1
+      - name: shellcheck setup
+        uses: mfinelli/setup-shfmt@v1
 
-      # - name: taplo setup
-      # - run: cargo install taplo-cli
+      - name: taplo setup
+        run: cargo install taplo-cli
 
-      # - name: Prettier setup
-      # - run: sudo apt-get install npm && npm install --global prettier
+      - name: Prettier setup
+        run: sudo apt-get install npm && npm install --global prettier
 
-      # - name: Diesel setup
+      - name: Diesel setup
+        run: |
+          sudo apt-get install libpq-dev && cargo install diesel_cli
+
+      # - name: Hasura setup
       #   run: |
-      #     sudo apt-get install libpq-dev && cargo install diesel_cli
+      #     sudo apt-get install curl
+      #     curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
 
-      # # - name: Hasura setup
-      # #   run: |
-      # #     sudo apt-get install curl
-      # #     curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+      - name: Formatting
+        run: |
+          cargo +nightly fmt -- --check
+          shfmt -i 2 -d .
+          taplo fmt **/*.toml --check
+          prettier . --check
 
-      # - name: Formatting
-      #   run: |
-      #     cargo +nightly fmt -- --check
-      #     shfmt -i 2 -d .
-      #     taplo fmt **/*.toml --check
-      #     prettier . --check
-
-      # - name: Linting
-      #   # TODO: shellcheck (https://github.com/marketplace/actions/shellcheck)
-      #   run: |
-      #     cargo clippy -- -D warnings
+      - name: Linting
+        # TODO: shellcheck (https://github.com/marketplace/actions/shellcheck)
+        run: |
+          cargo clippy -- -D warnings
 
       # - name: Smoke tests
       #   # TODO: check if hasura migrations + hasura ic list
