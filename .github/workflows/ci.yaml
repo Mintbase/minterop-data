@@ -19,8 +19,8 @@ jobs:
         ports:
           - 5432:5432
         options:
-          --health-cmd pg_isready --health-interval 3s --health-timeout 5s
-          --health-retries 3 -d minterop -U postgres
+          --health-cmd "pg_isready -d minterop -U postgres" --health-interval 3s
+          --health-timeout 5s --health-retries 3
 
     steps:
       - name: Check out code
