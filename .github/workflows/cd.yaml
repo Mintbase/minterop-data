@@ -41,4 +41,4 @@ jobs:
         # TODO: once stable, run testnet redeployment as well
         run: |
           echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
-          scripts/redeploy.sh sandbox latest
+          scripts/redeploy.sh sandbox
