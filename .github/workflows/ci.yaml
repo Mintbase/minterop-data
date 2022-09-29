@@ -70,4 +70,4 @@ jobs:
       - name: Smoke tests
         # TODO: check if hasura migrations + hasura ic list
         run: |
-          DATABASE_URL=postgres://postgres:password@postgres:5432/minterop diesel migration run
+          DATABASE_URL=postgres://postgres:password@localhost:5432/minterop diesel migration run
