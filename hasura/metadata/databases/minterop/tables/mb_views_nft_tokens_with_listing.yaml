@@ -9,6 +9,7 @@ select_permissions:
         - token_id
         - owner
         - metadata_id
+        - reference_blob
         - price
       filter: {}
       allow_aggregations: true
