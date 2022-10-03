@@ -22,5 +22,6 @@ select_permissions:
         - token_id
         - tx_sender
         - timestamp
+        - reference_blob
       filter: {}
       allow_aggregations: true

@@ -9,6 +9,7 @@ select_permissions:
         - title
         - description
         - media
+        - reference_blob
         - nft_contract_id
         - minted_timestamp
         - price
