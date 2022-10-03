@@ -28,7 +28,7 @@ select
 	t.token_id,
 	t.owner,
 	t.metadata_id,
-  t.reference_blob,
+  l.reference_blob,
 	l.price
 from nft_tokens t
 left join mb_views.active_listings l on l.nft_contract_id=t.nft_contract_id
