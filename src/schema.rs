@@ -107,7 +107,6 @@ table! {
         extra -> Nullable<Text>,
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
-        old_id -> Nullable<Text>,
     }
 }
 

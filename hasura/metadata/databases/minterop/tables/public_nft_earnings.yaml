@@ -11,6 +11,18 @@ object_relationships:
         insertion_order: null
         column_mapping:
           nft_contract_id: id
+  - name: offer
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_offers
+        insertion_order: null
+        column_mapping:
+          approval_id: approval_id
+          nft_contract_id: nft_contract_id
+          offer_id: offer_id
+          token_id: token_id
   - name: nft_token
     using:
       manual_configuration:
@@ -21,3 +33,20 @@ object_relationships:
         column_mapping:
           nft_contract_id: nft_contract_id
           token_id: token_id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - approval_id
+        - offer_id
+        - is_referral
+        - amount
+        - currency
+        - market_id
+        - nft_contract_id
+        - receipt_id
+        - receiver_id
+        - token_id
+        - timestamp
+      filter: {}
+      allow_aggregations: true

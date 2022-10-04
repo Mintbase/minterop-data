@@ -1,6 +1,17 @@
 table:
   schema: mb_views
   name: nft_tokens
+array_relationships:
+  - name: listings
+    using:
+      manual_configuration:
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+        insertion_order: null
+        remote_table:
+          name: nft_listings
+          schema: public
 select_permissions:
   - role: anonymous
     permission:

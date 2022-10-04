@@ -17,5 +17,6 @@ select_permissions:
         - spec
         - symbol
         - created_at
+        - content_flag
       filter: {}
       allow_aggregations: true

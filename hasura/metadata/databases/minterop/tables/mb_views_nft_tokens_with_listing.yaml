@@ -1,6 +1,6 @@
 table:
   schema: mb_views
-  name: nft_tokens_with_listings
+  name: nft_tokens_with_listing
 select_permissions:
   - role: anonymous
     permission:

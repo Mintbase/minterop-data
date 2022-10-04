@@ -2,15 +2,38 @@ table:
   schema: public
   name: nft_offers
 object_relationships:
+  - name: listing
+    using:
+      manual_configuration:
+        column_mapping:
+          approval_id: approval_id
+          market_id: market_id
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+        insertion_order: null
+        remote_table:
+          name: nft_listings
+          schema: public
   - name: nft_contracts
     using:
       manual_configuration:
-        remote_table:
-          schema: public
-          name: nft_contracts
-        insertion_order: null
         column_mapping:
           nft_contract_id: id
+        insertion_order: null
+        remote_table:
+          name: nft_contracts
+          schema: public
+  # FIXME: should be redundant with nft_token
+  - name: token
+    using:
+      manual_configuration:
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+        insertion_order: null
+        remote_table:
+          name: nft_tokens
+          schema: public
   - name: nft_token
     using:
       manual_configuration:
@@ -32,6 +55,8 @@ select_permissions:
         - nft_contract_id
         - offered_by
         - offer_price
+        - referral_amount
+        - referrer_id
         - receipt_id
         - token_id
         - accepted_at

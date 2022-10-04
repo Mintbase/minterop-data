@@ -8,19 +8,24 @@ select
 	m.title,
 	m.description,
 	m.media,
+	m.nft_contract_id,
+  m.base_uri,
   m.reference_blob,
-	t.nft_contract_id,
 	t.minted_timestamp,
   t.minter,
 	l.price
 from nft_metadata m
-left join (
+inner join (
   select distinct on (metadata_id) *
   from nft_tokens
-  order by metadata_id, minted_timestamp, burned_timestamp
+  where burned_timestamp is null
 ) t on m.id=t.metadata_id
-left join mb_views.active_listings_rollup l on m.id=l.metadata_id
-where t.burned_timestamp is null;
+left join (
+  select distinct on (metadata_id) metadata_id, price
+  from nft_listings
+  where unlisted_at is null and accepted_at is null
+  order by metadata_id, price
+) l on m.id=l.metadata_id;
 
 create view mb_views.nft_tokens_with_listing as
 select
