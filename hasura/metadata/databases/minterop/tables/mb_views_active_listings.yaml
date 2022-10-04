@@ -29,7 +29,6 @@ select_permissions:
   - role: anonymous
     permission:
       columns:
-        - approval_id
         - reference_blob
         - currency
         - description
