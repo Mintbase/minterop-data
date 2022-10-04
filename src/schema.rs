@@ -54,6 +54,7 @@ table! {
         created_receipt_id -> Nullable<Text>,
         owner_id -> Nullable<Text>,
         is_mintbase -> Bool,
+        content_flag -> Nullable<Text>,
     }
 }
 
@@ -106,6 +107,7 @@ table! {
         extra -> Nullable<Text>,
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
+        old_id -> Nullable<Text>,
     }
 }
 
