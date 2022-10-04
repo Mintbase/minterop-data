@@ -1,6 +1,17 @@
 table:
   schema: mb_views
   name: nft_metadata
+array_relationships:
+  - name: listings
+    using:
+      manual_configuration:
+        column_mapping:
+          id: metadata_id
+          nft_contract_id: nft_contract_id
+        insertion_order: null
+        remote_table:
+          name: active_listings
+          schema: mb_views
 select_permissions:
   - role: anonymous
     permission:

@@ -10,8 +10,11 @@ select_permissions:
         - description
         - media
         - reference_blob
+        - base_uri
         - nft_contract_id
         - minted_timestamp
+        - minter
         - price
+        - base_uri
       filter: {}
       allow_aggregations: true

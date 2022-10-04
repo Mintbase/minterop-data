@@ -12,12 +12,23 @@ object_relationships:
         column_mapping:
           nft_contract_id: id
 # allow selection for stats queries.
-# TODO: make a view instead
+# TODO: make views instead for stats
 select_permissions:
   - role: anonymous
     permission:
       columns:
+        - accepted_offer_id
+        - approval_id
+        - price
+        - currency
+        - kind
+        - listed_by
+        - market_id
         - nft_contract_id
+        - receipt_id
+        - token_id
         - accepted_at
+        - created_at
+        - unlisted_at
       filter: {}
       allow_aggregations: true

@@ -1,0 +1,1 @@
+alter table nft_contracts drop column content_flag;

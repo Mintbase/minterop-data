@@ -1,15 +1,12 @@
 table:
   schema: mb_views
-  name: nft_tokens_with_listing
+  name: top_stores
 select_permissions:
   - role: anonymous
     permission:
       columns:
         - nft_contract_id
-        - token_id
-        - owner
-        - metadata_id
-        - reference_blob
-        - price
+        - date
+        - total
       filter: {}
       allow_aggregations: true

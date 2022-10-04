@@ -11,6 +11,17 @@ object_relationships:
         insertion_order: null
         column_mapping:
           nft_contract_id: id
+array_relationships:
+  - name: nft_listings
+    using:
+      manual_configuration:
+        column_mapping:
+          token_id: token_id
+          nft_contract_id: nft_contract_id
+        insertion_order: null
+        remote_table:
+          name: nft_listings
+          schema: public
 select_permissions:
   - role: anonymous
     permission:

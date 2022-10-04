@@ -1,6 +1,14 @@
 table:
   schema: public
   name: mb_store_minters
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - nft_contract_id
+        - minter_id
+      filter: {}
+      allow_aggregations: true
 object_relationships:
   - name: nft_contracts
     using:
