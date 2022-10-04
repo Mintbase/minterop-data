@@ -11,3 +11,13 @@ object_relationships:
         insertion_order: null
         column_mapping:
           nft_contract_id: id
+  - name: nft_token
+    using:
+      manual_configuration:
+        remote_table:
+          schema: mb_views
+          name: nft_tokens
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
