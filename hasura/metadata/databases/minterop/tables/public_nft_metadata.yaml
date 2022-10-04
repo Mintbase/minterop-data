@@ -11,3 +11,18 @@ object_relationships:
         insertion_order: null
         column_mapping:
           nft_contract_id: id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - reference_blob
+        - description
+        - extra
+        - id
+        - media
+        - media_hash
+        - nft_contract_id
+        - reference
+        - title
+      filter: {}
+      allow_aggregations: true

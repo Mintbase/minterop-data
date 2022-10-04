@@ -1,0 +1,28 @@
+table:
+  name: active_listings_rollup
+  schema: mb_views
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - reference_blob
+        - approval_id
+        - price
+        - currency
+        - description
+        - extra
+        - kind
+        - listed_by
+        - market_id
+        - media
+        - metadata_id
+        - minter
+        - nft_contract_id
+        - receipt_id
+        - reference
+        - title
+        - token_id
+        - created_at
+        - base_uri
+      filter: {}
+      allow_aggregations: true

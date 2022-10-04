@@ -1,0 +1,12 @@
+table:
+  schema: mb_views
+  name: top_stores
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - nft_contract_id
+        - date
+        - total
+      filter: {}
+      allow_aggregations: true
