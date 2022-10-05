@@ -10,8 +10,8 @@ jobs:
     container:
       image: ghcr.io/mintbase/diesel-builder:latest
       credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
+        username: ${{ github.ACTOR }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     services:
       postgres:
