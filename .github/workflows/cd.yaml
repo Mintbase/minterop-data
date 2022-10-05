@@ -1,4 +1,4 @@
-name: CommonHasuraCICD
+name: Sandbox Deployment
 
 on:
   push:
@@ -6,8 +6,6 @@ on:
       - main
 
 jobs:
-  # this is a full redeploy! in perspective, this should do DB migratons, and
-  # then just start from the current block height
   deploy:
     runs-on: ubuntu-22.04
     name: Diesel and Hasura migrations
@@ -38,7 +36,26 @@ jobs:
           curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
 
       - name: Redeployment script
-        # TODO: once stable, run testnet redeployment as well
         run: |
           echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
           scripts/redeploy.sh sandbox
+
+      - name: Check inconsistencies
+        run: |
+          npm i -g hasura-cli --y
+          hasura metadata ic list --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/ --output json > ic.json
+
+      - name: Print inconsistencies
+        run: |
+          echo "Finished meta apply, inconsitency json:"
+          cat ic.json
+
+      - name: Extract inconsistencies
+        uses: sergeysova/jq-action@v2
+        id: result
+        with:
+          cmd: "jq length ic.json"
+
+      - name: Error if there are inconsistencies
+        run: |
+          [ "${{ steps.result.outputs.value }}" = ""  ] && exit 0 || exit 1

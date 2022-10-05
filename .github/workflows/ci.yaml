@@ -1,13 +1,11 @@
-name: CommonHasuraCICD
+name: Sandbox PR Mergecheck
 
 on:
   pull_request:
 
 jobs:
-  # this is a full redeploy! in perspective, this should do DB migratons, and
-  # then just start from the current block height
   ci:
-    name: Continuous integration
+    name: Merge Checks
     runs-on: ubuntu-22.04
     services:
       postgres:
@@ -60,17 +58,32 @@ jobs:
         run: |
           cargo clippy -- -D warnings
 
-      - name: Diesel setup
+      - name: Install Diesel
         # TODO: use precompiled once feasible (https://github.com/diesel-rs/diesel/issues/2379)
         run: |
           sudo apt-get install libpq-dev && cargo install --debug diesel_cli --no-default-features --features postgres
 
-      # - name: Hasura setup
-      #   run: |
-      #     sudo apt-get install curl
-      #     curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
-
-      - name: Smoke tests
-        # TODO: check if hasura migrations + hasura ic list
+      - name: Test Migrations Locally
         run: |
           DATABASE_URL=postgres://postgres:password@localhost:5432/minterop diesel migration run
+
+      - name: "Apply hasura metadata to sandbox"
+        run: |
+          npm i -g hasura-cli --y
+          hasura metadata apply --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/
+          hasura metadata ic list --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/ --output json > ic.json
+
+      - name: Print any inconsistencies
+        run: |
+          echo "Finished meta apply, inconsitency json:"
+          cat ic.json
+
+      - name: Extract inconsistencies
+        uses: sergeysova/jq-action@v2
+        id: result
+        with:
+          cmd: "jq length ic.json"
+
+      - name: Error if there are inconsistencies
+        run: |
+          [ "${{ steps.result.outputs.value }}" = ""  ] && exit 0 || exit 1
