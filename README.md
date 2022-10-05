@@ -16,8 +16,12 @@ Migrations under the hood use [diesel](https://diesel.rs/), a Rust library for d
 
 ## Hasura Config
 
-At this time, environment variables for cloud triggers (ultimately this should be replaced) are required for each hasura configuration and this needs to be done manually.
+At this time, environment variables for cloud triggers (ultimately this should be replaced) are required for each hasura configuration and this [needs to be done manually](https://hasura.io/docs/latest/projects/env-vars/#introduction).
 
-## CICD / Redeploy
+Currently `HASURA_POSTGRES`, `CLOUD_FUNCTIONS_BASE_URL`, and `NEAR_NETWORK` must be set for metadata to apply correctly.
 
-CICD will attempt to run migrations and apply hasura metadta. Whenever inconsistencies between these are detected, the run will fail.
+## CICD
+
+CICD will attempt to run migrations and apply hasura metadta via scripts/redploy.sh.
+
+Whenever inconsistencies between these are detected, the run will fail.
