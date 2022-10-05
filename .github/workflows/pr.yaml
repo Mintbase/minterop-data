@@ -8,18 +8,6 @@ jobs:
     name: Merge Checks, Sandbox CI
     runs-on: ubuntu-22.04
 
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: minterop
-        ports:
-          - 5432:5432
-        options:
-          --health-cmd "pg_isready -d minterop -U postgres" --health-interval 3s
-          --health-timeout 5s --health-retries 3
 
     container:
       image: ghcr.io/mintbase/diesel-builder:latest
