@@ -22,6 +22,10 @@ Currently `HASURA_POSTGRES`, `CLOUD_FUNCTIONS_BASE_URL`, and `NEAR_NETWORK` must
 
 ## CICD
 
+CICD uses a docker images with tools pre-installed (Builder.dockerfile) and deployed to ghcr.io. For more information on working with ghcr.io (Github Container Repo) see [docs here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry)
+
 CICD will attempt to run migrations and apply hasura metadta via scripts/redploy.sh.
 
 Whenever inconsistencies between these are detected, the run will fail.
+
+
