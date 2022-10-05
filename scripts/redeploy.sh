@@ -6,6 +6,7 @@ read -r -d '' HASURA_GRANTS <<EOF
 grant connect on database minterop to hasura;
 grant select on all tables in schema public to hasura;
 grant select on all tables in schema mb_views to hasura;
+grant trigger on public.nft_offers to hasura;
 grant select on all sequences in schema mb_views to hasura;
 grant usage on schema mb_views to hasura;
 EOF
