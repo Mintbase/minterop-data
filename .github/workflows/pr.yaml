@@ -7,11 +7,6 @@ jobs:
   ci:
     name: Merge Checks, Sandbox CI
     runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/mintbase/diesel-builder:latest
-      credentials:
-        username: ${{ github.ACTOR }}
-        password: ${{ secrets.GITHUB_TOKEN }}
 
     services:
       postgres:
@@ -25,6 +20,12 @@ jobs:
         options:
           --health-cmd "pg_isready -d minterop -U postgres" --health-interval 3s
           --health-timeout 5s --health-retries 3
+
+    container:
+      image: ghcr.io/mintbase/diesel-builder:latest
+      credentials:
+        username: ${{ github.ACTOR }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Check out code
