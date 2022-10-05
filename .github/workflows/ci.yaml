@@ -1,0 +1,95 @@
+name: Merge Check w Sandbox CI
+
+on:
+  pull_request:
+
+jobs:
+  ci:
+    name: Merge Check w Sandbox CI
+    runs-on: ubuntu-22.04
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: minterop
+        ports:
+          - 5432:5432
+        options:
+          --health-cmd "pg_isready -d minterop -U postgres" --health-interval 3s
+          --health-timeout 5s --health-retries 3
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Rust setup
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly # TODO: back to stable once fmt features are stable
+          default: true
+          override: true
+          components: rustfmt, clippy
+
+      - name: shftmt setup
+        uses: mfinelli/setup-shfmt@v1
+
+      - name: shellcheck setup
+        uses: mfinelli/setup-shfmt@v1
+
+      - name: taplo setup
+        # TODO: use precompiled if available (https://github.com/tamasfe/taplo/issues/326)
+        # --debug to speed up the install
+        run: cargo install --debug taplo-cli
+
+      - name: Prettier setup
+        run: sudo apt-get install npm && npm install --global prettier
+
+      - name: Formatting
+        run: |
+          cargo +nightly fmt -- --check
+          shfmt -i 2 -d .
+          taplo fmt **/*.toml --check
+          prettier . --check
+
+      - name: Linting
+        # TODO: shellcheck (https://github.com/marketplace/actions/shellcheck)
+        run: |
+          cargo clippy -- -D warnings
+
+      - name: Diesel setup
+        # TODO: use precompiled once feasible (https://github.com/diesel-rs/diesel/issues/2379)
+        run: |
+          sudo apt-get install libpq-dev && cargo install --debug diesel_cli --no-default-features --features postgres
+
+      # - name: Hasura setup
+      #   run: |
+      #     sudo apt-get install curl
+      #     curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+
+      - name: Run migrations on local container
+        # TODO: check if hasura migrations + hasura ic list
+        run: |
+          DATABASE_URL=postgres://postgres:password@localhost:5432/minterop diesel migration run
+
+      - name: Apply hasura metadata to sandbox
+        run: |
+          npm i -g hasura-cli --y
+          hasura metadata apply --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/
+          hasura metadata ic list --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/ --output json > ic.json
+
+      - name: Print any inconsistencies
+        run: |
+          echo "Finished meta apply, inconsitency json:"
+          cat ic.json
+
+      - name: Extract inconsistencies
+        uses: sergeysova/jq-action@v2
+        id: result
+        with:
+          cmd: "jq length ic.json"
+
+      - name: Error if there are inconsistencies
+        run: |
+          [ "${{ steps.result.outputs.value }}" = ""  ] && exit 0 || exit 1
