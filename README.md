@@ -27,5 +27,3 @@ CICD uses a docker images with tools pre-installed (Builder.dockerfile) and depl
 CICD will attempt to run migrations and apply hasura metadta via scripts/redploy.sh.
 
 Whenever inconsistencies between these are detected, the run will fail.
-
-
