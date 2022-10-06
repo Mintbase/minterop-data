@@ -64,3 +64,17 @@ select_permissions:
         - withdrawn_at
       filter: {}
       allow_aggregations: true
+event_triggers:
+  - name: onNewOffer
+    definition:
+      enable_manual: false
+      insert:
+        columns: "*"
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: "{{CLOUD_FUNCTIONS_BASE_URL}}/onNewOffer"
+    headers:
+      - name: network
+        value: "{{NEAR_NETWORK}}"
