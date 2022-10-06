@@ -75,8 +75,8 @@ jobs:
       - name: Apply hasura metadata to sandbox
         run: |
           echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
-          hasura metadata apply --envfile sandbox.env
-          hasura metadata ic list --envfile sandbox.env --output json > ic.json
+          (cd hasura && hasura metadata apply --envfile ../sandbox.env)
+          (cd hasura && hasura metadata ic list --envfile ../sandbox.env --output json > ../ic.json)
 
       - name: Print any inconsistencies
         run: |

@@ -42,7 +42,7 @@ jobs:
 
       - name: Check inconsistencies
         run: |
-          hasura metadata ic list --envfile sandbox.env --output json > ic.json
+          (cd hasura && hasura metadata ic list --envfile ../sandbox.env --output json > ../ic.json)
 
       - name: Print inconsistencies
         run: |
