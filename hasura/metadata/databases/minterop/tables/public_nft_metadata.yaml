@@ -24,5 +24,6 @@ select_permissions:
         - nft_contract_id
         - reference
         - title
+        - base_uri
       filter: {}
       allow_aggregations: true

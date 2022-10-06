@@ -42,8 +42,7 @@ jobs:
 
       - name: Check inconsistencies
         run: |
-          npm i -g hasura-cli --y
-          hasura metadata ic list --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/ --output json > ic.json
+          hasura metadata ic list --envfile sandbox.env --output json > ic.json
 
       - name: Print inconsistencies
         run: |
