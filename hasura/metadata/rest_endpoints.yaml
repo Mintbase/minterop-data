@@ -1,1 +1,10 @@
-[]
+- comment: 'Gets all stores, used by dapp radar'
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: All Stores Endpoint
+  methods:
+    - GET
+    - POST
+  name: All Stores Endpoint
+  url: all-stores

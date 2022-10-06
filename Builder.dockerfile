@@ -10,6 +10,4 @@ RUN npm i -g hasura-cli prettier --y
 RUN cargo install --debug taplo-cli
 RUN cargo install --debug diesel_cli --no-default-features --features postgres
 
-
-
 RUN curl -sS https://webi.sh/shfmt | sh
