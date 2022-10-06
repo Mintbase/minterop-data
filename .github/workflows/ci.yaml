@@ -82,8 +82,8 @@ jobs:
         run: |
           cat sandbox.env
           npm i -g hasura-cli --y
-          hasura metadata apply --project hasura --admin-secret "${HASURA_GRAPHQL_ADMIN_SECRET}" --endpoint https://interop-sandbox.hasura.app/
-          hasura metadata ic list --project hasura --admin-secret "${HASURA_GRAPHQL_ADMIN_SECRET}" --endpoint https://interop-sandbox.hasura.app/ --output json > ic.json
+          hasura metadata apply --project hasura
+          hasura metadata ic list --project hasura --output json > ic.json
 
       - name: Print any inconsistencies
         run: |
