@@ -39,6 +39,7 @@ jobs:
         run: |
           echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
           scripts/redeploy.sh sandbox
+          # TODO: add consistency check in deployment script
 
       - name: Check inconsistencies
         run: |
