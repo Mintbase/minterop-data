@@ -73,11 +73,16 @@ jobs:
         run: |
           DATABASE_URL=postgres://postgres:password@localhost:5432/minterop diesel migration run
 
+      - name: Source sandbox env
+        run: |
+          echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
+          source sandbox.env
+
       - name: Apply hasura metadata to sandbox
         run: |
           npm i -g hasura-cli --y
-          hasura metadata apply --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/
-          hasura metadata ic list --project hasura --admin-secret "${{ secrets.HASURA_SANDBOX_ADMIN }}" --endpoint https://interop-sandbox.hasura.app/ --output json > ic.json
+          hasura metadata apply --project hasura --endpoint https://interop-sandbox.hasura.app/
+          hasura metadata ic list --project hasura --endpoint https://interop-sandbox.hasura.app/ --output json > ic.json
 
       - name: Print any inconsistencies
         run: |
