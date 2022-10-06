@@ -1,4 +1,4 @@
-- comment: 'Gets all stores, used by dapp radar'
+- comment: "Gets all stores, used by dapp radar"
   definition:
     query:
       collection_name: allowed-queries
