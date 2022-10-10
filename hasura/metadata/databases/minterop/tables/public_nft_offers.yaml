@@ -14,7 +14,16 @@ object_relationships:
         remote_table:
           name: nft_listings
           schema: public
-  - name: nft_contracts
+  - name: nft_contracts # TODO: deprecate
+    using:
+      manual_configuration:
+        column_mapping:
+          nft_contract_id: id
+        insertion_order: null
+        remote_table:
+          name: nft_contracts
+          schema: public
+  - name: nft_contract
     using:
       manual_configuration:
         column_mapping:

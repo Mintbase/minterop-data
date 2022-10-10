@@ -2,7 +2,7 @@ table:
   schema: public
   name: nft_tokens
 object_relationships:
-  - name: nft_contracts
+  - name: nft_contracts # TODO: deprecate
     using:
       manual_configuration:
         remote_table:
