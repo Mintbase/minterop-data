@@ -60,6 +60,7 @@ select_permissions:
         - accepted_at
         - offered_at
         - withdrawn_at
+        - expires_at
       filter: {}
       allow_aggregations: true
 event_triggers:
