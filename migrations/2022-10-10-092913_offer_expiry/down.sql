@@ -1,0 +1,1 @@
+alter table nft_offers drop column expires_at;

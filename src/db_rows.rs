@@ -235,6 +235,7 @@ pub struct NftOffer {
     pub referral_amount: Option<String>,
     pub withdrawn_at: Option<NaiveDateTime>,
     pub accepted_at: Option<NaiveDateTime>,
+    pub expires_at: Option<NaiveDateTime>,
 }
 
 #[derive(diesel::Insertable)]

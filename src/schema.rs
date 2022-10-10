@@ -107,7 +107,6 @@ table! {
         extra -> Nullable<Text>,
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
-        old_id -> Nullable<Text>,
     }
 }
 
@@ -127,6 +126,7 @@ table! {
         referral_amount -> Nullable<Text>,
         withdrawn_at -> Nullable<Timestamp>,
         accepted_at -> Nullable<Timestamp>,
+        expires_at -> Nullable<Timestamp>,
     }
 }
 
