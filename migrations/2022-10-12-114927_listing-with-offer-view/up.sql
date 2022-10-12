@@ -1,5 +1,5 @@
-create view mb_views.active_listings_with_offer
-as select
+create view mb_views.auctions_with_offer
+as select distinct on (nft_contract_id, token_id, market_id, approval_id)
   l.nft_contract_id,
   l.token_id,
   l.market_id,
@@ -32,11 +32,12 @@ from nft_listings l
   left join nft_metadata m
   on l.metadata_id = m.id
   left join (
-  	select * from nft_offers where accepted_at is null and withdrawn_at is null
+  	select * from nft_offers
+  	where withdrawn_at is null
   ) o
     on l.nft_contract_id = o.nft_contract_id
     and l.token_id = o.token_id
     and l.market_id = o.market_id
     and l.approval_id = o.approval_id
-where l.unlisted_at is null
-  and l.accepted_at is null;
+where l.kind = 'auction'
+order by nft_contract_id, token_id, market_id, approval_id, o.offered_at desc;

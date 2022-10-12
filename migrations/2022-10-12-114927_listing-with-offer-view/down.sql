@@ -1,1 +1,1 @@
-drop view mb_views.active_listings_with_offer;
+drop view mb_views.auctions_with_offer;
