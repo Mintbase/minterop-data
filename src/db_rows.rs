@@ -58,7 +58,7 @@ impl NftToken {
     }
 }
 
-#[derive(diesel::Insertable)]
+#[derive(Clone, diesel::Insertable, diesel::AsChangeset)]
 #[table_name = "nft_metadata"]
 pub struct NftMetadata {
     pub id: String,
