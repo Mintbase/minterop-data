@@ -29,7 +29,7 @@ where l.unlisted_at is null
   and t.burned_timestamp is null
   and t.owner = l.listed_by;
 
-create or replace create view mb_views.active_listings_rollup
+create or replace view mb_views.active_listings_rollup
 as select distinct on (metadata_id)
   l.nft_contract_id,
   l.token_id,
