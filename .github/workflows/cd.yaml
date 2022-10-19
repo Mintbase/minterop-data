@@ -1,9 +1,14 @@
 name: Sandbox Deployment
 
+# FIXME: restore
+# on:
+#   push:
+#     branches:
+#       - main
 on:
   push:
     branches:
-      - main
+      - release-worflow
 
 jobs:
   deploy:
