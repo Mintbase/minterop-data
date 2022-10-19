@@ -1,4 +1,6 @@
-create or replace view mb_views.active_listings
+drop view mb_views.active_listings;
+
+create view mb_views.active_listings
 as select
   l.nft_contract_id,
   l.token_id,
@@ -24,7 +26,9 @@ from nft_listings l
 where l.unlisted_at is null
   and l.accepted_at is null;
 
-create or replace view mb_views.active_listings_rollup
+drop view mb_views.active_listings_rollup;
+
+create view mb_views.active_listings_rollup
 as select distinct on (metadata_id)
   l.nft_contract_id,
   l.token_id,
