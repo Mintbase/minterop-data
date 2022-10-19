@@ -25,8 +25,15 @@ DATABASE_URL="$POSTGRES" diesel migration run || exit 1
 # hasura project reload metadata
 (
   cd ./hasura || exit 1
-  hasura metadata apply --envfile "../$network.env"
+  hasura metadata apply --envfile "../$network.env" || exit 1
+  hasura metadata ic list --envfile "../$network.env" --output json >../ic.json
 ) || exit 1
+
+if [[ $(jq length ic.json) > 0 ]]; then
+  echo "METADATA INCONSISTENCIES:"
+  cat ic.json
+  exit 1
+fi
 
 # grant privileges to hasura user
 psql "$POSTGRES" -c "$HASURA_GRANTS" || exit 1
