@@ -8,7 +8,7 @@ name: Sandbox Deployment
 on:
   push:
     branches:
-      - release-worflow
+      - release-workflow
 
 jobs:
   deploy:
