@@ -1,4 +1,4 @@
-name: Sandbox Deployment
+name: Testnet and mainnet Deployment
 
 on:
   release:
