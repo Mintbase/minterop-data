@@ -1,9 +1,8 @@
 name: Sandbox Deployment
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [released]
 
 jobs:
   deploy:
@@ -40,7 +39,12 @@ jobs:
         with:
           version: 1.6
 
-      - name: Redeployment script
+      - name: Redeployment script (testnet)
         run: |
-          echo "${{ secrets.SANDBOX_ENV }}" > sandbox.env
-          scripts/redeploy.sh sandbox
+          echo "${{ secrets.TESTNET_ENV }}" > testnet.env
+          scripts/redeploy.sh testnet
+
+      - name: Redeployment script (mainnet)
+        run: |
+          echo "${{ secrets.MAINNET_ENV }}" > mainnet.env
+          scripts/redeploy.sh mainnet
