@@ -17,7 +17,8 @@ as select
   m.description,
   m.reference_blob,
   m.media,
-  m.extra
+  m.extra,
+  m.base_uri
 from nft_listings l
   left join nft_metadata m
   on l.metadata_id = m.id
@@ -43,7 +44,8 @@ as select distinct on (metadata_id)
   m.description,
   m.reference_blob,
   m.media,
-  m.extra
+  m.extra,
+  m.base_uri
 from nft_listings l
   left join nft_metadata m
   on l.metadata_id = m.id
