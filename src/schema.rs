@@ -90,6 +90,7 @@ table! {
         accepted_at -> Nullable<Timestamp>,
         accepted_offer_id -> Nullable<Int8>,
         metadata_id -> Nullable<Text>,
+        invalidated_at -> Nullable<Timestamp>,
     }
 }
 
@@ -127,6 +128,7 @@ table! {
         withdrawn_at -> Nullable<Timestamp>,
         accepted_at -> Nullable<Timestamp>,
         expires_at -> Nullable<Timestamp>,
+        invalidated_at -> Nullable<Timestamp>,
     }
 }
 
