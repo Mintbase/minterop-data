@@ -5,8 +5,8 @@ alter table nft_listings add column invalidated_at timestamp;
 -- Populating offer invalidation
 update nft_offers set invalidated_at = j.timestamp
 from (
-  select * from nft_offers o
-  inner join nft_activities a
+  select o.accepted_at, o.withdrawn_at, a.kind, a.timestamp
+  from nft_offers o inner join nft_activities a
     on o.token_id = a.token_id
     and o.nft_contract_id = a.nft_contract_id
     and o.offered_at < a.timestamp
@@ -21,8 +21,8 @@ where (j.kind = 'transfer' or j.kind = 'burn')
 -- Populating listing invalidation
 update nft_listings set invalidated_at = j.timestamp
 from (
-  select * from nft_listings l
-  inner join nft_activities a
+  select l.accepted_at, l.unlisted_at, a.kind, a.timestamp
+  from nft_listings l inner join nft_activities a
     on l.token_id = a.token_id
     and l.nft_contract_id = a.nft_contract_id
     and l.created_at < a.timestamp
