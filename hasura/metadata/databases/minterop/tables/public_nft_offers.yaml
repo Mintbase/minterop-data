@@ -64,6 +64,7 @@ select_permissions:
         - withdrawn_at
         - expires_at
         - invalidated_at
+        - outbid_at
       filter: {}
       allow_aggregations: true
 event_triggers:
