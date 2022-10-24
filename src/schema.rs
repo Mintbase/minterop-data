@@ -129,6 +129,7 @@ table! {
         accepted_at -> Nullable<Timestamp>,
         expires_at -> Nullable<Timestamp>,
         invalidated_at -> Nullable<Timestamp>,
+        outbid_at -> Nullable<Timestamp>,
     }
 }
 
