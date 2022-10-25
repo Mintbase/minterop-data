@@ -9,3 +9,4 @@ tmp.txt
 *.env
 .DS_Store
 **target
+ic.json

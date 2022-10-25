@@ -11,6 +11,12 @@ grant select on all sequences in schema mb_views to hasura;
 grant usage on schema mb_views to hasura;
 EOF
 
+read -r -d '' POSTGRES_GRANTS <<EOF
+grant usage on schema hdb_catalog to postgres;
+grant select on all tables in schema hdb_catalog to postgres;
+grant insert on all tables in schema hdb_catalog to postgres;
+EOF
+
 source "$network.env" || exit 1
 
 # run diesel migrations
@@ -19,8 +25,16 @@ DATABASE_URL="$POSTGRES" diesel migration run || exit 1
 # hasura project reload metadata
 (
   cd ./hasura || exit 1
-  hasura metadata apply --envfile "../$network.env"
+  hasura metadata apply --envfile "../$network.env" || exit 1
+  hasura metadata ic list --envfile "../$network.env" --output json >../ic.json
 ) || exit 1
 
+if [[ $(jq length ic.json) > 0 ]]; then
+  echo "METADATA INCONSISTENCIES:"
+  cat ic.json
+  exit 1
+fi
+
 # grant privileges to hasura user
-psql "$POSTGRES" -c "$HASURA_GRANTS"
+psql "$POSTGRES" -c "$HASURA_GRANTS" || exit 1
+psql "$HASURA_POSTGRES" -c "$POSTGRES_GRANTS" || exit 1

@@ -58,7 +58,7 @@ impl NftToken {
     }
 }
 
-#[derive(diesel::Insertable)]
+#[derive(Clone, diesel::Insertable, diesel::AsChangeset)]
 #[table_name = "nft_metadata"]
 pub struct NftMetadata {
     pub id: String,
@@ -213,7 +213,8 @@ pub struct NftListing {
     pub unlisted_at: Option<NaiveDateTime>,
     pub accepted_at: Option<NaiveDateTime>,
     pub accepted_offer_id: Option<i64>,
-    pub metadata_id: String,
+    pub invalidated_at: Option<NaiveDateTime>,
+    pub metadata_id: Option<String>,
 }
 
 pub const NFT_LISTING_KIND_SIMPLE: &str = "simple";
@@ -235,6 +236,9 @@ pub struct NftOffer {
     pub referral_amount: Option<String>,
     pub withdrawn_at: Option<NaiveDateTime>,
     pub accepted_at: Option<NaiveDateTime>,
+    pub invalidated_at: Option<NaiveDateTime>,
+    pub outbid_at: Option<NaiveDateTime>,
+    pub expires_at: Option<NaiveDateTime>,
 }
 
 #[derive(diesel::Insertable)]
