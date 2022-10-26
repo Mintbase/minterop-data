@@ -16,24 +16,28 @@ select_permissions:
   - role: anonymous
     permission:
       columns:
-        - reference_blob
-        - currency
-        - description
-        - extra
-        - kind
-        - listed_by
-        - media
-        - minter
         - nft_contract_id
-        - price
-        - listing_receipt_id
-        - reference
-        - title
         - token_id
-        - created_at
+        - reference_blob
         - market_id
         - approval_id
+        - created_at
+        - listing_receipt_id
+        - kind
+        - price
+        - currency
+        - listed_by
         - metadata_id
+        - unlisted_at
+        - listing_accepted_at
+        - listing_invalidated_at
+        - reference
+        - minter
+        - title
+        - description
+        - reference_blob
+        - media
+        - extra
         - base_uri
         - offered_by
         - offer_price
