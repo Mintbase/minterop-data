@@ -30,3 +30,17 @@ insert into nft_earnings (
     't' -- is_mintbase_cut
 from nft_offers
 where accepted_at is not null;
+
+-- fix mb_views.tokens_with_listing.reference_blob
+drop view mb_views.nft_tokens_with_listing;
+create view mb_views.nft_tokens_with_listing
+as select
+	t.nft_contract_id,
+	t.token_id,
+	t.owner,
+	t.metadata_id,
+	l.price,
+  l.reference_blob
+from nft_tokens t
+left join mb_views.active_listings l on l.nft_contract_id=t.nft_contract_id
+where t.burned_timestamp is null;
