@@ -74,8 +74,8 @@ as select distinct on (nft_contract_id, token_id, market_id, approval_id)
   l.listed_by,
   l.metadata_id,
   l.unlisted_at,
-  l.accepted_at as listing_accepted_at, -- FIXME: hasura
-  l.invalidated_at as listing_invalidated_at, -- FIXME: hasura
+  l.accepted_at as listing_accepted_at,
+  l.invalidated_at as listing_invalidated_at,
   m.reference,
   m.minter,
   m.title,
