@@ -71,6 +71,7 @@ table! {
         currency -> Text,
         amount -> Numeric,
         is_referral -> Bool,
+        is_mintbase_cut -> Bool,
     }
 }
 

@@ -254,4 +254,5 @@ pub struct NftEarning {
     pub receiver_id: String,
     pub amount: BigDecimal,
     pub is_referral: bool,
+    pub is_mintbase_cut: bool,
 }
