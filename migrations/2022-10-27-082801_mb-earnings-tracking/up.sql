@@ -1,65 +1,15 @@
-drop view mb_views.nft_tokens_with_listing;
+alter table nft_earnings
+add column is_mintbase_cut
+boolean not null default 'f';
+
+-- needs to be dropped to alter nft_offers.referral_amount
 drop view mb_views.auctions_with_offer;
-drop view mb_views.active_listings_rollup;
-drop view mb_views.active_listings;
+alter table nft_offers
+alter column referral_amount
+type numeric
+using referral_amount::numeric;
 
-create view mb_views.active_listings
-as select
-  l.nft_contract_id,
-  l.token_id,
-  l.market_id,
-  l.approval_id,
-  l.created_at,
-  l.receipt_id,
-  l.kind,
-  l.price,
-  l.currency,
-  l.listed_by,
-  l.metadata_id,
-  m.reference,
-  m.minter,
-  m.title,
-  m.description,
-  m.reference_blob,
-  m.media,
-  m.extra,
-  m.base_uri
-from nft_listings l
-  left join nft_metadata m
-  on l.metadata_id = m.id
-where l.unlisted_at is null
-  and l.accepted_at is null
-  and l.invalidated_at is null;
-
-create view mb_views.active_listings_rollup
-as select distinct on (metadata_id)
-  l.nft_contract_id,
-  l.token_id,
-  l.market_id,
-  l.approval_id,
-  l.created_at,
-  l.receipt_id,
-  l.kind,
-  l.price,
-  l.currency,
-  l.listed_by,
-  l.metadata_id,
-  m.reference,
-  m.minter,
-  m.title,
-  m.description,
-  m.reference_blob,
-  m.media,
-  m.extra,
-  m.base_uri
-from nft_listings l
-  left join nft_metadata m
-  on l.metadata_id = m.id
-where l.unlisted_at is null
-  and l.accepted_at is null
-  and l.invalidated_at is null
-order by metadata_id, price;
-
+-- recreate
 create view mb_views.auctions_with_offer
 as select distinct on (nft_contract_id, token_id, market_id, approval_id)
   l.nft_contract_id,
@@ -109,13 +59,45 @@ from nft_listings l
 where l.kind = 'auction'
 order by nft_contract_id, token_id, market_id, approval_id, o.offered_at desc;
 
+insert into nft_earnings (
+  nft_contract_id,
+  token_id,
+  market_id,
+  approval_id,
+  offer_id,
+  receipt_id,
+  timestamp,
+  receiver_id,
+  currency,
+  amount,
+  is_referral,
+  is_mintbase_cut
+) select
+    nft_contract_id,
+    token_id,
+    market_id,
+    approval_id,
+    offer_id,
+    receipt_id,
+    accepted_at,
+    market_id,  --receiver_id
+    currency,
+    (offer_price * 250 / 10000), -- amount
+    'f', -- is_referral
+    't' -- is_mintbase_cut
+from nft_offers
+where accepted_at is not null;
+
+-- fix mb_views.tokens_with_listing.reference_blob
+drop view mb_views.nft_tokens_with_listing;
 create view mb_views.nft_tokens_with_listing
 as select
 	t.nft_contract_id,
 	t.token_id,
 	t.owner,
 	t.metadata_id,
-	l.price
+	l.price,
+  l.reference_blob
 from nft_tokens t
 left join mb_views.active_listings l on l.nft_contract_id=t.nft_contract_id
 where t.burned_timestamp is null;

@@ -233,7 +233,7 @@ pub struct NftOffer {
     pub receipt_id: String,
     pub offer_id: i64,
     pub referrer_id: Option<String>,
-    pub referral_amount: Option<String>,
+    pub referral_amount: Option<BigDecimal>,
     pub withdrawn_at: Option<NaiveDateTime>,
     pub accepted_at: Option<NaiveDateTime>,
     pub invalidated_at: Option<NaiveDateTime>,
@@ -254,4 +254,5 @@ pub struct NftEarning {
     pub receiver_id: String,
     pub amount: BigDecimal,
     pub is_referral: bool,
+    pub is_mintbase_cut: bool,
 }

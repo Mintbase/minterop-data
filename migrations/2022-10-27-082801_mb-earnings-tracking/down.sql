@@ -1,64 +1,10 @@
-drop view mb_views.nft_tokens_with_listing;
+alter table nft_earnings drop column is_mintbase_cut;
+
 drop view mb_views.auctions_with_offer;
-drop view mb_views.active_listings_rollup;
-drop view mb_views.active_listings;
-
-create view mb_views.active_listings
-as select
-  l.nft_contract_id,
-  l.token_id,
-  l.market_id,
-  l.approval_id,
-  l.created_at,
-  l.receipt_id,
-  l.kind,
-  l.price,
-  l.currency,
-  l.listed_by,
-  l.metadata_id,
-  m.reference,
-  m.minter,
-  m.title,
-  m.description,
-  m.reference_blob,
-  m.media,
-  m.extra,
-  m.base_uri
-from nft_listings l
-  left join nft_metadata m
-  on l.metadata_id = m.id
-where l.unlisted_at is null
-  and l.accepted_at is null
-  and l.invalidated_at is null;
-
-create view mb_views.active_listings_rollup
-as select distinct on (metadata_id)
-  l.nft_contract_id,
-  l.token_id,
-  l.market_id,
-  l.approval_id,
-  l.created_at,
-  l.receipt_id,
-  l.kind,
-  l.price,
-  l.currency,
-  l.listed_by,
-  l.metadata_id,
-  m.reference,
-  m.minter,
-  m.title,
-  m.description,
-  m.reference_blob,
-  m.media,
-  m.extra,
-  m.base_uri
-from nft_listings l
-  left join nft_metadata m
-  on l.metadata_id = m.id
-where l.unlisted_at is null
-  and l.accepted_at is null
-  and l.invalidated_at is null
-order by metadata_id, price;
+alter table nft_offers
+alter column referral_amount
+type text
+using referral_amount::text;
 
 create view mb_views.auctions_with_offer
 as select distinct on (nft_contract_id, token_id, market_id, approval_id)
@@ -109,6 +55,8 @@ from nft_listings l
 where l.kind = 'auction'
 order by nft_contract_id, token_id, market_id, approval_id, o.offered_at desc;
 
+
+drop view mb_views.nft_tokens_with_listing;
 create view mb_views.nft_tokens_with_listing
 as select
 	t.nft_contract_id,
