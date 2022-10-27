@@ -2,7 +2,16 @@ table:
   schema: public
   name: nft_listings
 object_relationships:
-  - name: nft_contracts
+  - name: nft_contracts # TODO: deprecate
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+  - name: nft_contract
     using:
       manual_configuration:
         remote_table:
@@ -44,5 +53,6 @@ select_permissions:
         - accepted_at
         - created_at
         - unlisted_at
+        - invalidated_at
       filter: {}
       allow_aggregations: true

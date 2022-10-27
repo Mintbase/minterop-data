@@ -71,6 +71,7 @@ table! {
         currency -> Text,
         amount -> Numeric,
         is_referral -> Bool,
+        is_mintbase_cut -> Bool,
     }
 }
 
@@ -90,6 +91,7 @@ table! {
         accepted_at -> Nullable<Timestamp>,
         accepted_offer_id -> Nullable<Int8>,
         metadata_id -> Nullable<Text>,
+        invalidated_at -> Nullable<Timestamp>,
     }
 }
 
@@ -123,10 +125,12 @@ table! {
         receipt_id -> Text,
         offer_id -> Int8,
         referrer_id -> Nullable<Text>,
-        referral_amount -> Nullable<Text>,
+        referral_amount -> Nullable<Numeric>,
         withdrawn_at -> Nullable<Timestamp>,
         accepted_at -> Nullable<Timestamp>,
         expires_at -> Nullable<Timestamp>,
+        invalidated_at -> Nullable<Timestamp>,
+        outbid_at -> Nullable<Timestamp>,
     }
 }
 

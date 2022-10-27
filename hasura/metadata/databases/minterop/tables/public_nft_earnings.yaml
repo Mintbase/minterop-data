@@ -2,7 +2,16 @@ table:
   schema: public
   name: nft_earnings
 object_relationships:
-  - name: nft_contracts
+  - name: nft_contracts # TODO: deprecate
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+  - name: nft_contract
     using:
       manual_configuration:
         remote_table:
@@ -40,6 +49,7 @@ select_permissions:
         - approval_id
         - offer_id
         - is_referral
+        - is_mintbase_cut
         - amount
         - currency
         - market_id
