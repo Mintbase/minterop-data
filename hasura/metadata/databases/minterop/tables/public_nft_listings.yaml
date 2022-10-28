@@ -20,6 +20,19 @@ object_relationships:
         insertion_order: null
         column_mapping:
           nft_contract_id: id
+array_relationships:
+  - name: offers
+    using:
+      manual_configuration:
+        column_mapping:
+          approval_id: approval_id
+          market_id: market_id
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+        insertion_order: null
+        remote_table:
+          name: nft_offers
+          schema: public
 # allow selection for stats queries.
 # TODO: make views instead for stats
 select_permissions:
@@ -33,6 +46,7 @@ select_permissions:
         - kind
         - listed_by
         - market_id
+        - metadata_id
         - nft_contract_id
         - receipt_id
         - token_id

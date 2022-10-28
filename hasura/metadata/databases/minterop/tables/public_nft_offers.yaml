@@ -42,6 +42,17 @@ object_relationships:
         column_mapping:
           nft_contract_id: nft_contract_id
           token_id: token_id
+  # FIXME: should be redundant with nft_token
+  - name: token
+    using:
+      manual_configuration:
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+        insertion_order: null
+        remote_table:
+          name: nft_tokens
+          schema: public
 select_permissions:
   - role: anonymous
     permission:
