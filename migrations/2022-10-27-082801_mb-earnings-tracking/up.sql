@@ -100,7 +100,8 @@ insert into nft_earnings (
     'f', -- is_referral
     't' -- is_mintbase_cut
 from nft_offers
-where accepted_at is not null;
+where accepted_at is not null
+on conflict do nothing;
 
 -- fix mb_views.tokens_with_listing.reference_blob
 drop view mb_views.nft_tokens_with_listing;
