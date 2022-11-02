@@ -1,3 +1,14 @@
+delete from nft_earnings where is_mintbase_cut is TRUE;
+alter table nft_earnings drop constraint nft_earnings_pkey;
+alter table nft_earnings alter is_referral set not null;
+alter table nft_earnings alter is_mintbase_cut set not null;
+alter table nft_earnings add primary key (
+  nft_contract_id,
+  token_id,
+  market_id,
+  approval_id,
+  receiver_id
+);
 alter table nft_earnings drop column is_mintbase_cut;
 
 drop view mb_views.auctions_with_offer;
@@ -54,7 +65,6 @@ from nft_listings l
     and l.approval_id = o.approval_id
 where l.kind = 'auction'
 order by nft_contract_id, token_id, market_id, approval_id, o.offered_at desc;
-
 
 drop view mb_views.nft_tokens_with_listing;
 create view mb_views.nft_tokens_with_listing
