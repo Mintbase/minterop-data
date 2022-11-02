@@ -59,7 +59,7 @@ table! {
 }
 
 table! {
-    nft_earnings (nft_contract_id, token_id, market_id, approval_id, receiver_id) {
+    nft_earnings (nft_contract_id, token_id, market_id, approval_id, receiver_id, is_referral, is_mintbase_cut) {
         nft_contract_id -> Text,
         token_id -> Text,
         market_id -> Text,

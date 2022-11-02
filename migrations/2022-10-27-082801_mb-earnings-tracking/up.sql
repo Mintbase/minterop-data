@@ -59,6 +59,20 @@ from nft_listings l
 where l.kind = 'auction'
 order by nft_contract_id, token_id, market_id, approval_id, o.offered_at desc;
 
+-- change nft-earnings-pkey
+alter table nft_earnings drop constraint nft_earnings_pkey;
+alter table nft_earnings alter is_referral set not null;
+alter table nft_earnings alter is_mintbase_cut set not null;
+alter table nft_earnings add primary key (
+  nft_contract_id,
+  token_id,
+  market_id,
+  approval_id,
+  receiver_id,
+  is_referral,
+  is_mintbase_cut
+);
+
 insert into nft_earnings (
   nft_contract_id,
   token_id,
