@@ -1,0 +1,1 @@
+drop view mb_views.nft_tokens_with_media_type;
