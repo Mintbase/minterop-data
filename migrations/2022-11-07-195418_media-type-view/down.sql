@@ -1,0 +1,2 @@
+drop view mb_views.nft_tokens_with_media_type;
+drop index nft_metadata_animation_url_type;
