@@ -1,6 +1,6 @@
 table:
   schema: mb_views
-  name: nft_tokens_with_media
+  name: nft_tokens_with_media_type
 array_relationships:
   - name: listings
     using:
