@@ -16,5 +16,6 @@ select_permissions:
         - minter
         - price
         - base_uri
+        - content_flag
       filter: {}
       allow_aggregations: true

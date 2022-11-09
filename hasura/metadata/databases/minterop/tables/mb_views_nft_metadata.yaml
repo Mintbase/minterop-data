@@ -24,6 +24,7 @@ select_permissions:
         - id
         - media
         - media_hash
+        - metadata_content_flag
         - nft_contract_id
         - nft_contract_icon
         - nft_contract_name
@@ -33,5 +34,6 @@ select_permissions:
         - nft_contract_symbol
         - title
         - nft_contract_created_at
+        - nft_contract_content_flag
       filter: {}
       allow_aggregations: true

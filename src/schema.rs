@@ -109,6 +109,7 @@ table! {
         extra -> Nullable<Text>,
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
+        content_flag -> Nullable<Text>,
     }
 }
 
@@ -158,7 +159,6 @@ table! {
         royalties_percent -> Nullable<Int4>,
         royalties -> Nullable<Jsonb>,
         splits -> Nullable<Jsonb>,
-        content_flag -> Nullable<Text>,
     }
 }
 

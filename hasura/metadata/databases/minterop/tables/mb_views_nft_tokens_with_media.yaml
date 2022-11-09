@@ -40,6 +40,7 @@ select_permissions:
         - nft_contract_reference
         - nft_contract_spec
         - nft_contract_symbol
+        - nft_contract_content_flag
         - owner
         - reference
         - reference_hash
@@ -55,5 +56,6 @@ select_permissions:
         - updated_at
         - forever_media_url
         - forever_media_type
+        - metadata_content_flag
       filter: {}
       allow_aggregations: true
