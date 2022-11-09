@@ -53,5 +53,6 @@ select_permissions:
         - nft_contract_created_at
         - starts_at
         - updated_at
+        - metadata_content_flag
       filter: {}
       allow_aggregations: true

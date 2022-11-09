@@ -48,5 +48,6 @@ select_permissions:
         - approval_id
         - metadata_id
         - base_uri
+        - content_flag
       filter: {}
       allow_aggregations: true

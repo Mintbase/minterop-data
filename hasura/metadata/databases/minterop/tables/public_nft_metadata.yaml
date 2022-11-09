@@ -34,5 +34,6 @@ select_permissions:
         - reference
         - title
         - base_uri
+        - content_flag
       filter: {}
       allow_aggregations: true

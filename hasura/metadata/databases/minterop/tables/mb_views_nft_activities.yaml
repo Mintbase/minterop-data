@@ -22,5 +22,6 @@ select_permissions:
         - tx_sender
         - timestamp
         - reference_blob
+        - content_flag
       filter: {}
       allow_aggregations: true

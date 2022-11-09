@@ -39,6 +39,7 @@ select_permissions:
         - media
         - extra
         - base_uri
+        - content_flag
         - offered_by
         - offer_price
         - offered_at

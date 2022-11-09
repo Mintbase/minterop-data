@@ -24,5 +24,6 @@ select_permissions:
         - token_id
         - created_at
         - base_uri
+        - content_flag
       filter: {}
       allow_aggregations: true

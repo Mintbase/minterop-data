@@ -11,5 +11,6 @@ select_permissions:
         - metadata_id
         - reference_blob
         - price
+        - content_flag
       filter: {}
       allow_aggregations: true
