@@ -131,21 +131,22 @@ impl NftMetadata {
 }
 
 #[derive(Clone, diesel::Insertable, diesel::AsChangeset)]
-#[table_name = "nft_attributes"]
-pub struct NftAttributes {
+pub struct NftAttribute {
     pub nft_metadata_id: String,
     pub nft_contract_id: String,
     pub attribute_type: String,
     pub attribute_value: Option<String>,
+    pub attribute_display_type: Option<String>,
 }
 
-impl NftAttributes {
+impl NftAttribute {
     pub fn empty() -> Self {
-        NftAttributes {
+        NftAttribute {
             nft_metadata_id: "".to_string(),
             nft_contract_id: "".to_string(),
             attribute_type: "".to_string(),
             attribute_value: None,
+            attribute_display_type: None,
         }
     }
 

@@ -45,7 +45,8 @@ table! {
         nft_metadata_id -> Text,
         nft_contract_id -> Text,
         attribute_type -> Text,
-        metadata_value -> Nullable<Text>,
+        attribute_value -> Nullable<Text>,
+        attribute_display_type -> Nullable<Text>,
     }
 }
 
