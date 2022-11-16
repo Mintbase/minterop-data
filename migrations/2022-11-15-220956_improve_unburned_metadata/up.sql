@@ -20,7 +20,7 @@ left join lateral (
   from nft_tokens t
   where t.burned_timestamp is null and t.metadata_id = md.id
     order by t.minted_timestamp desc
-    LIMIT 1
+    limit 1
 ) t on true
 left join lateral (
   select p.price
@@ -30,6 +30,6 @@ left join lateral (
     p.accepted_at is null and
     p.invalidated_at is null and
     p.metadata_id = md.id
-  order by p.price asc
+  order by p.price asc nulls last
   limit 1
 ) l on true;
