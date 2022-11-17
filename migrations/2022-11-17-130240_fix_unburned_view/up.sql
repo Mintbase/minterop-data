@@ -33,4 +33,5 @@ left join lateral (
     p.metadata_id = md.id
   order by p.price asc
   limit 1
-) l on true where t.minted_timestamp is not null;
+) l on true
+where t.minted_timestamp is not null;
