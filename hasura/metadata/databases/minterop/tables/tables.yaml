@@ -13,6 +13,7 @@
 - "!include public_mb_store_minters.yaml"
 - "!include public_nft_activities.yaml"
 - "!include public_nft_approvals.yaml"
+- "!include public_nft_attributes.yaml"
 - "!include public_nft_contracts.yaml"
 - "!include public_nft_earnings.yaml"
 - "!include public_nft_listings.yaml"

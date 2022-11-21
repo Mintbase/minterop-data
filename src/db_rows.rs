@@ -130,6 +130,29 @@ impl NftMetadata {
     // fn from_blob(blob: serde_json::Value) -> Option<Self> {}
 }
 
+#[derive(Clone, diesel::Insertable, diesel::AsChangeset)]
+pub struct NftAttribute {
+    pub nft_metadata_id: String,
+    pub nft_contract_id: String,
+    pub attribute_type: String,
+    pub attribute_value: Option<String>,
+    pub attribute_display_type: Option<String>,
+}
+
+impl NftAttribute {
+    pub fn empty() -> Self {
+        NftAttribute {
+            nft_metadata_id: "".to_string(),
+            nft_contract_id: "".to_string(),
+            attribute_type: "".to_string(),
+            attribute_value: None,
+            attribute_display_type: None,
+        }
+    }
+
+    // fn from_blob(blob: serde_json::Value) -> Option<Self> {}
+}
+
 #[derive(diesel::Insertable)]
 pub struct NftContract {
     pub id: String,

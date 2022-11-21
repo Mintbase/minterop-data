@@ -41,6 +41,16 @@ table! {
 }
 
 table! {
+    nft_attributes (nft_metadata_id, nft_contract_id, attribute_type) {
+        nft_metadata_id -> Text,
+        nft_contract_id -> Text,
+        attribute_type -> Text,
+        attribute_value -> Nullable<Text>,
+        attribute_display_type -> Nullable<Text>,
+    }
+}
+
+table! {
     nft_contracts (id) {
         id -> Text,
         spec -> Text,
@@ -167,6 +177,7 @@ allow_tables_to_appear_in_same_query!(
     mb_store_minters,
     nft_activities,
     nft_approvals,
+    nft_attributes,
     nft_contracts,
     nft_earnings,
     nft_listings,
