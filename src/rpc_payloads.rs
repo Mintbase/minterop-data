@@ -16,12 +16,20 @@ pub enum RpcMessage {
         refresh: Option<bool>,
         minter: Option<String>,
     },
+    #[serde(rename = "sale")]
+    HandleSalePayload {
+        contract_id: String,
+        token_id: String,
+        new_owner_id: String,
+        receipt_id: String,
+    },
 }
 
 impl RpcMessage {
     pub fn from_contract(contract_id: String) -> Self {
         Self::HandleContractPayload { contract_id }
     }
+
     pub fn from_token(
         contract_id: String,
         token_ids: Vec<String>,
@@ -32,6 +40,20 @@ impl RpcMessage {
             token_ids,
             refresh: Some(false),
             minter,
+        }
+    }
+
+    pub fn from_sale(
+        contract_id: String,
+        token_id: String,
+        new_owner_id: String,
+        receipt_id: String,
+    ) -> Self {
+        Self::HandleSalePayload {
+            contract_id,
+            token_id,
+            new_owner_id,
+            receipt_id,
         }
     }
 }
