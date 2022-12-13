@@ -3,7 +3,7 @@ use chrono::NaiveDateTime;
 
 // ----------------------- core/interop functionality ----------------------- //
 use crate::schema::*;
-#[derive(diesel::Insertable, Clone)]
+#[derive(diesel::Insertable, diesel::Queryable, Clone)]
 pub struct NftToken {
     pub token_id: String,
     pub nft_contract_id: String,
@@ -58,7 +58,7 @@ impl NftToken {
     }
 }
 
-#[derive(Clone, diesel::Insertable, diesel::AsChangeset)]
+#[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]
 #[table_name = "nft_metadata"]
 pub struct NftMetadata {
     pub id: String,
@@ -130,7 +130,7 @@ impl NftMetadata {
     // fn from_blob(blob: serde_json::Value) -> Option<Self> {}
 }
 
-#[derive(Clone, diesel::Insertable, diesel::AsChangeset)]
+#[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]
 pub struct NftAttribute {
     pub nft_metadata_id: String,
     pub nft_contract_id: String,
@@ -153,7 +153,7 @@ impl NftAttribute {
     // fn from_blob(blob: serde_json::Value) -> Option<Self> {}
 }
 
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, diesel::Queryable)]
 pub struct NftContract {
     pub id: String,
     pub spec: String,
@@ -170,7 +170,7 @@ pub struct NftContract {
 }
 
 // --------------------- specifics for mintbase stores ---------------------- //
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, diesel::Queryable)]
 pub struct NftApproval {
     pub nft_contract_id: String,
     pub token_id: String,
@@ -180,7 +180,7 @@ pub struct NftApproval {
     pub timestamp: NaiveDateTime,
 }
 
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, diesel::Queryable)]
 pub struct MbStoreMinter {
     pub nft_contract_id: String,
     pub minter_id: String,
@@ -189,7 +189,7 @@ pub struct MbStoreMinter {
 }
 
 // ------------------------- activities/provenance -------------------------- //
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, diesel::Queryable)]
 #[table_name = "nft_activities"]
 pub struct NftActivity {
     pub receipt_id: String,
@@ -221,7 +221,7 @@ pub const NFT_ACTIVITY_KIND_MAKE_OFFER: &str = "make_offer";
 pub const NFT_ACTIVITY_KIND_WITHDRAW_OFFER: &str = "withdraw_offer";
 
 // --------------------------------- market --------------------------------- //
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, diesel::Queryable)]
 pub struct NftListing {
     pub nft_contract_id: String,
     pub token_id: String,
@@ -243,7 +243,7 @@ pub struct NftListing {
 pub const NFT_LISTING_KIND_SIMPLE: &str = "simple";
 pub const NFT_LISTING_KIND_AUCTION: &str = "auction";
 
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, diesel::Queryable)]
 pub struct NftOffer {
     pub nft_contract_id: String,
     pub token_id: String,
@@ -264,7 +264,7 @@ pub struct NftOffer {
     pub expires_at: Option<NaiveDateTime>,
 }
 
-#[derive(diesel::Insertable)]
+#[derive(diesel::Insertable, diesel::Queryable)]
 pub struct NftEarning {
     pub nft_contract_id: String,
     pub token_id: String,
