@@ -54,5 +54,10 @@ select_permissions:
         - starts_at
         - updated_at
         - metadata_content_flag
+        - price
+        - currency
+        - listing_kind
+        - market_id
+        - listing_approval_id
       filter: {}
       allow_aggregations: true
