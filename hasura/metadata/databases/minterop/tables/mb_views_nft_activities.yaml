@@ -27,6 +27,8 @@ select_permissions:
         - receipt_id
         - reference
         - reference_hash
+        - copies
+        - metadata_id
         - title
         - token_id
         - tx_sender
