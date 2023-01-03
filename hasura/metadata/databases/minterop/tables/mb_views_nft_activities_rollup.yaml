@@ -24,7 +24,7 @@ select_permissions:
         - price
         - reference
         - reference_blob
-        - id as metadata_id
+        - metadata_id
         - title
         - description
         - media
