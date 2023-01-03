@@ -1,0 +1,38 @@
+table:
+  schema: mb_views
+  name: nft_activities_rollup
+object_relationships:
+  - name: nft_contract
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - tx_sender
+        - timestamp
+        - nft_contract_id
+        - kind
+        - action_sender
+        - action_receiver
+        - price
+        - reference
+        - reference_blob
+        - id as metadata_id
+        - title
+        - description
+        - media
+        - media_hash
+        - extra
+        - content_flag
+        - receipt_id
+        - count
+        - token_ids
+      filter: {}
+      allow_aggregations: true
