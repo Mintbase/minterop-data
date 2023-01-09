@@ -200,7 +200,7 @@ pub struct NftActivity {
     pub token_id: String,
     pub kind: String,
     /// transfers, approvals, revokes
-    pub action_sender: Option<String>,
+    pub action_sender: String,
     pub action_receiver: Option<String>,
     pub memo: Option<String>,
     /// only on listing events
