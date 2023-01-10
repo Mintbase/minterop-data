@@ -200,7 +200,7 @@ pub struct NftActivity {
     pub token_id: String,
     pub kind: String,
     /// transfers, approvals, revokes
-    pub action_sender: Option<String>,
+    pub action_sender: String,
     pub action_receiver: Option<String>,
     pub memo: Option<String>,
     /// only on listing events
@@ -236,8 +236,8 @@ pub struct NftListing {
     pub unlisted_at: Option<NaiveDateTime>,
     pub accepted_at: Option<NaiveDateTime>,
     pub accepted_offer_id: Option<i64>,
-    pub invalidated_at: Option<NaiveDateTime>,
     pub metadata_id: Option<String>,
+    pub invalidated_at: Option<NaiveDateTime>,
 }
 
 pub const NFT_LISTING_KIND_SIMPLE: &str = "simple";
