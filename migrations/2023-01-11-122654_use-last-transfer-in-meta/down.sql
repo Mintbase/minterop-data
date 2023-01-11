@@ -1,4 +1,4 @@
-rop view mb_views.nft_metadata_unburned;
+drop view mb_views.nft_metadata_unburned;
 
 create view mb_views.nft_metadata_unburned as
 select md.id as metadata_id,
