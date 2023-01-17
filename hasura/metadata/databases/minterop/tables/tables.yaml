@@ -1,3 +1,4 @@
+- "!include analytics_tmp_referrer_earnings.yaml"
 - "!include mb_views_active_listings_rollup.yaml"
 - "!include mb_views_active_listings.yaml"
 - "!include mb_views_auctions_with_offer.yaml"
