@@ -10,6 +10,8 @@ grant trigger on public.nft_offers to hasura;
 grant select on all sequences in schema mb_views to hasura;
 grant usage on schema mb_views to hasura;
 grant select on all tables in schema analytics_tmp to hasura;
+grant select on all sequences in schema analytics_tmp to hasura;
+grant usage on schema analytics_tmp to hasura;
 EOF
 
 read -r -d '' POSTGRES_GRANTS <<EOF
