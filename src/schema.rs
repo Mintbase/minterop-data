@@ -101,7 +101,6 @@ table! {
         accepted_at -> Nullable<Timestamp>,
         accepted_offer_id -> Nullable<Int8>,
         metadata_id -> Nullable<Text>,
-        new_metadata_id -> Nullable<Text>,
         invalidated_at -> Nullable<Timestamp>,
     }
 }
@@ -120,10 +119,6 @@ table! {
         extra -> Nullable<Text>,
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
-        old_id -> Nullable<Text>,
-        old_reference -> Nullable<Text>,
-        old_media -> Nullable<Text>,
-        new_media -> Nullable<Text>,
         content_flag -> Nullable<Text>,
     }
 }
@@ -174,8 +169,6 @@ table! {
         royalties_percent -> Nullable<Int4>,
         royalties -> Nullable<Jsonb>,
         splits -> Nullable<Jsonb>,
-        old_metadata_id -> Nullable<Text>,
-        old_reference -> Nullable<Text>,
     }
 }
 
