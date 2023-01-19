@@ -1,0 +1,1 @@
+drop index nft_unburned_meta_by_minter;
