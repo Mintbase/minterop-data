@@ -1,6 +1,4 @@
 drop view mb_views.active_listings_by_contract;
-drop view mb_views.nft_metadata_unburned;
-drop view mb_views.active_listings_by_contract;
 
 create view mb_views.nft_metadata_unburned as
 select md.id as metadata_id,
