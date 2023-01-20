@@ -1,4 +1,5 @@
-- "!include analytics_tmp_referrer_earnings.yaml"
+- "!include analytics_tmp_referrer_earnings_monthly.yaml"
+- "!include analytics_tmp_referrer_earnings_yearly.yaml"
 - "!include mb_views_active_listings_rollup.yaml"
 - "!include mb_views_active_listings.yaml"
 - "!include mb_views_active_listings_by_contract.yaml"
