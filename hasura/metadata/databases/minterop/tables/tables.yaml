@@ -1,6 +1,7 @@
 - "!include analytics_tmp_referrer_earnings.yaml"
 - "!include mb_views_active_listings_rollup.yaml"
 - "!include mb_views_active_listings.yaml"
+- "!include mb_views_active_listings_by_contract.yaml"
 - "!include mb_views_auctions_with_offer.yaml"
 - "!include mb_views_nft_activities.yaml"
 - "!include mb_views_nft_activities_rollup.yaml"
