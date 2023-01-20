@@ -1,6 +1,6 @@
 table:
   schema: analytics_tmp
-  name: referrer_earnings
+  name: referrer_earnings_monthly
 select_permissions:
   - role: anonymous
     permission:
