@@ -1,3 +1,4 @@
+drop view mb_views.active_listings_by_contract;
 create view mb_views.active_listings_by_contract as
 select
  	c.id as nft_contract_id,
