@@ -40,4 +40,4 @@ left join lateral (
   where cl.metadata_id = m.id and c.id = m.nft_contract_id
   limit 1
 ) cmd on true
-where cl.price is not null -- omit null lateral appendages
+where cl.price is not null; -- omit null lateral appendages
