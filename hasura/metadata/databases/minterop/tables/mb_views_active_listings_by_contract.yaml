@@ -1,0 +1,45 @@
+table:
+  schema: mb_views
+  name: active_listings_by_contract
+object_relationships:
+  - name: token
+    using:
+      manual_configuration:
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+        insertion_order: null
+        remote_table:
+          name: nft_tokens
+          schema: mb_views
+array_relationships:
+  - name: offers
+    using:
+      manual_configuration:
+        column_mapping:
+          approval_id: approval_id
+          market_id: market_id
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+        insertion_order: null
+        remote_table:
+          name: nft_offers
+          schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - nft_contract_id
+        - base_uri
+        - price
+        - created_at
+        - metadata_id
+        - token_id
+        - title
+        - media
+        - market_id
+        - approval_id
+        - listed_by
+        - total_listings
+      filter: {}
+      allow_aggregations: true
