@@ -12,6 +12,16 @@ array_relationships:
         remote_table:
           name: nft_listings
           schema: public
+  - name: attributes
+    using:
+      manual_configuration:
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          metadata_id: nft_metadata_id
+        insertion_order: null
+        remote_table:
+          name: nft_attributes
+          schema: public
 select_permissions:
   - role: anonymous
     permission:
