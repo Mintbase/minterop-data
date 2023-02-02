@@ -1,0 +1,13 @@
+table:
+  schema: analytics_tmp
+  name: affiliate_earnings_yearly
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - date_trunc
+        - affiliate_id
+        - sales_count
+        - total_earned
+      filter: {}
+      allow_aggregations: true

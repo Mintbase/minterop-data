@@ -49,6 +49,7 @@ select_permissions:
         - approval_id
         - offer_id
         - is_referral
+        - is_affiliate
         - is_mintbase_cut
         - amount
         - currency
