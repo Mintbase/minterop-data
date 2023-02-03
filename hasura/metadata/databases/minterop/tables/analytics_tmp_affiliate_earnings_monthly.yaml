@@ -1,6 +1,6 @@
 table:
   schema: analytics_tmp
-  name: affiliate_monthly
+  name: affiliate_earnings_monthly
 select_permissions:
   - role: anonymous
     permission:
