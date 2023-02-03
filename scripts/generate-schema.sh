@@ -12,6 +12,9 @@ quietly() {
 quietly docker kill postgresDB
 quietly docker rm postgresDB
 
+docker network inspect minterop >/dev/null 2>&1 ||
+  docker network create minterop
+
 docker run --name postgresDB \
   -e POSTGRES_USER="postgres" \
   -e POSTGRES_PASSWORD="password" \

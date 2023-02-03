@@ -65,7 +65,9 @@ select_permissions:
         - offered_by
         - offer_price
         - referral_amount
+        - affiliate_amount
         - referrer_id
+        - affiliate_id
         - receipt_id
         - token_id
         - accepted_at
