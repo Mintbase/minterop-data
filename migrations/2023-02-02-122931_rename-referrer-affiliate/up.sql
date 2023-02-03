@@ -12,7 +12,7 @@ update nft_offers set affiliate_amount = referral_amount;
 create view analytics_tmp.affiliate_earnings_monthly as
   select
     date_trunc,
-    receiver_id as referrer_id,
+    receiver_id as affiliate_id,
     sum(amount) as total_earned,
     count(*) as sales_count
   from (
@@ -28,7 +28,7 @@ create view analytics_tmp.affiliate_earnings_monthly as
 create view analytics_tmp.affiliate_earnings_yearly as
   select
     date_trunc,
-    receiver_id as referrer_id,
+    receiver_id as affiliate_id,
     sum(amount) as total_earned,
     count(*) as sales_count
   from (
