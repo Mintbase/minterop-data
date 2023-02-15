@@ -8,7 +8,10 @@ use serde::{
 #[serde(tag = "kind", content = "payload")]
 pub enum RpcMessage {
     #[serde(rename = "contract")]
-    HandleContractPayload { contract_id: String },
+    HandleContractPayload {
+        contract_id: String,
+        refresh: Option<bool>, // as update to keep it backwards compatible
+    },
     #[serde(rename = "token")]
     HandleTokenPayload {
         contract_id: String,
@@ -26,8 +29,11 @@ pub enum RpcMessage {
 }
 
 impl RpcMessage {
-    pub fn from_contract(contract_id: String) -> Self {
-        Self::HandleContractPayload { contract_id }
+    pub fn from_contract(contract_id: String, update: bool) -> Self {
+        Self::HandleContractPayload {
+            contract_id,
+            refresh: Some(update),
+        }
     }
 
     pub fn from_token(
@@ -65,8 +71,7 @@ mod tests {
         HandleContractPayload,
         HandleTokenPayload,
     };
-    const CONTRACT_PAYLOAD_STR: &str =
-        r#"{"kind":"contract","payload":{"contract_id":"foo.near"}}"#;
+    const CONTRACT_PAYLOAD_STR: &str = r#"{"kind":"contract","payload":{"contract_id":"foo.near","refresh":null}}"#;
     const TOKEN_PAYLOAD_STR: &str = r#"{"kind":"token","payload":{"contract_id":"foo.near","token_ids":["bar"],"refresh":null,"minter":"foo.near"}}"#;
 
     fn token_payload() -> RpcMessage {
@@ -81,6 +86,7 @@ mod tests {
     fn contract_payload() -> RpcMessage {
         HandleContractPayload {
             contract_id: "foo.near".to_string(),
+            refresh: None,
         }
     }
 
