@@ -153,7 +153,7 @@ impl NftAttribute {
     // fn from_blob(blob: serde_json::Value) -> Option<Self> {}
 }
 
-#[derive(diesel::Insertable, diesel::Queryable)]
+#[derive(diesel::Insertable, diesel::Queryable, diesel::AsChangeset, Clone)]
 pub struct NftContract {
     pub id: String,
     pub spec: String,
