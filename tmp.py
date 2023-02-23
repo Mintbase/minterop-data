@@ -233,7 +233,6 @@ order by year_month
 
 
 # ---------------------------------- burned ---------------------------------- #
-
 BURNED_DAILY_FILTERED_SQL = f"""
 select
   year_month_day,
@@ -335,25 +334,6 @@ order by year_month
 """.strip()
 
 # ---------------------------------- listed ---------------------------------- #
-LISTED_DAILY_SQL = f"""
-select
-  year_month_day,
-  count(*) as lists_count,
-  count(distinct(listed_by)) as listers_count,
-  count(distinct(nft_contract_id)) as contracts_count
-from (
-  select
-    to_char(created_at, 'YYYY-MM-DD') as year_month_day,
-    listed_by,
-    nft_contract_id
-  from nft_listings
-  where created_at::date >= '{{0}}'::date
-    and created_at::date <= '{{1}}'::date
-) t
-group by year_month_day
-order by year_month_day
-""".strip()
-
 LISTED_DAILY_FILTERED_SQL = f"""
 select
   year_month_day,
@@ -455,27 +435,6 @@ order by year_month
 # ----------------------------------- sold ----------------------------------- #
 # TODO: these are quite slow, probably due to the join, might replace with
 # lateral join later
-
-SOLD_DAILY_SQL = f"""
-select
-  year_month_day,
-  count(*) as sales_count,
-  count(distinct(offered_by)) as buyers_count,
-  count(distinct(listed_by)) as sellers_count,
-  count(distinct(nft_contract_id)) as contracts_count
-from (
-  select
-    to_char(l.accepted_at, 'YYYY-MM-DD') as year_month_day,
-    listed_by,
-    offered_by,
-    l.nft_contract_id
-  from {OFFERS_LISTINGS_JOIN}
-  where l.accepted_at::date >= '{{0}}'::date
-    and l.accepted_at::date <= '{{1}}'::date
-) t
-group by year_month_day
-order by year_month_day
-""".strip()
 
 SOLD_DAILY_FILTERED_SQL = f"""
 select
@@ -586,30 +545,6 @@ order by year_month
 """.strip()
 
 # -------------------------------- MB stores --------------------------------- #
-MB_STORES_DAILY_SQL = f"""
-select year_month_day, deploys_count, deployers_count, total_deployed from (
-  select
-    year_month_day,
-    to_date(year_month_day, 'YYYY-MM-DD') as created_at,
-    count(*) as deploys_count,
-	  count(distinct(owner_id)) as deployers_count,
-    sum(count(*)) over (order by year_month_day) as total_deployed
-  from (
-    select
-      to_char(created_at, 'YYYY-MM-DD') as year_month_day,
-      id,
-      owner_id
-    from nft_contracts
-    where id like '%.mintbase1.near'
-      and created_at is not null
-  ) t
-  group by year_month_day
-  order by year_month_day
-) u
-where created_at >= '{{0}}'::date
-  and created_at <= '{{1}}'::date
-""".strip()
-
 MB_STORES_WEEKLY_SQL = f"""
 select year_week, deploys_count, deployers_count, total_deployed from (
   select
