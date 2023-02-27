@@ -134,6 +134,7 @@ from (
         nft_contract_id
       from nft_listings
     ) t
+    where year_month_day is not null
     group by year_month_day
   ) listed
   on coalesce(
@@ -211,7 +212,7 @@ from (
         nft_contract_id
       from nft_activities
       where nft_contract_id like '%.mintbase1.near'
-      and nft_contract_id <> 'deadmau5.mintbase1.near'
+        and nft_contract_id <> 'deadmau5.mintbase1.near'
     ) t
     group by year_month_day
   ) unique_ids
@@ -227,6 +228,8 @@ from (
 order by year_month_day desc;
 
 -- ------------------------ daily stats per contract ------------------------ --
+-- FIXME:
+-- [ ] totals will be wrong
 create materialized view analytics_tmp.daily_stats_per_contract as
 select *,
   to_date(year_month_day, 'YYYY-MM-DD')::timestamp as date_trunc,
@@ -234,8 +237,7 @@ select *,
   sum(transfers_count) over (order by year_month_day) as total_transferred,
   sum(burns_count) over (order by year_month_day) as total_burned,
   sum(lists_count) over (order by year_month_day) as total_listed,
-  sum(sales_count) over (order by year_month_day) as total_sold,
-  sum(deploys_count) over (order by year_month_day) as total_deployed
+  sum(sales_count) over (order by year_month_day) as total_sold
 from (
   select
     coalesce(
@@ -244,7 +246,6 @@ from (
       burned.year_month_day,
       listed.year_month_day,
       sold.year_month_day,
-      deployed.year_month_day,
       unique_ids.year_month_day
     ) as year_month_day,
     minted.mints_count,
@@ -264,8 +265,6 @@ from (
     sold.buyers_count,
     sold.sellers_count,
     sold.sold_contracts_count,
-    deployed.deploys_count,
-    deployed.deployers_count,
     unique_ids.activities_count,
     unique_ids.unique_account_ids,
     unique_ids.unique_token_ids,
@@ -283,12 +282,10 @@ from (
         minter,
         nft_contract_id
       from nft_tokens
-      where nft_contract_id like '%.mintbase1.near'
-        and nft_contract_id <> 'deadmau5.mintbase1.near'
-        and minted_timestamp is not null
+      where minted_timestamp is not null
     ) t
     where year_month_day is not null
-    group by year_month_day
+    group by year_month_day, nft_contract_id
   ) minted
   -- transferred tokens
   full outer join (
@@ -306,10 +303,8 @@ from (
         nft_contract_id
       from nft_activities
       where kind = 'transfer'
-        and nft_contract_id like '%.mintbase1.near'
-        and nft_contract_id <> 'deadmau5.mintbase1.near'
     ) t
-    group by year_month_day
+    group by year_month_day, nft_contract_id
   ) transferred
   on minted.year_month_day = transferred.year_month_day
   -- burned tokens
@@ -325,11 +320,9 @@ from (
         owner,
         nft_contract_id
       from nft_tokens
-      where nft_contract_id like '%.mintbase1.near'
-        and nft_contract_id <> 'deadmau5.mintbase1.near'
-        and burned_timestamp is not null
+      where burned_timestamp is not null
     ) t
-    group by year_month_day
+    group by year_month_day, nft_contract_id
   ) burned
   on coalesce(
     minted.year_month_day, transferred.year_month_day
@@ -348,7 +341,8 @@ from (
         nft_contract_id
       from nft_listings
     ) t
-    group by year_month_day
+    where year_month_day is not null
+    group by year_month_day, nft_contract_id
   ) listed
   on coalesce(
     minted.year_month_day, transferred.year_month_day, burned.year_month_day
@@ -376,7 +370,7 @@ from (
         and o.offer_id = l.accepted_offer_id
     ) t
     where year_month_day is not null
-    group by year_month_day
+    group by year_month_day, nft_contract_id
   ) sold
   on coalesce(
     minted.year_month_day,
@@ -384,31 +378,6 @@ from (
     burned.year_month_day,
     listed.year_month_day
   ) = sold.year_month_day
-  -- deployed contracts
-  full outer join (
-    select
-      year_month_day,
-      to_date(year_month_day, 'YYYY-MM-DD') as created_at,
-      count(*) as deploys_count,
-      count(distinct(owner_id)) as deployers_count
-    from (
-      select
-        to_char(created_at, 'YYYY-MM-DD') as year_month_day,
-        id,
-        owner_id
-      from nft_contracts
-      where id like '%.mintbase1.near'
-        and created_at is not null
-    ) t
-    group by year_month_day
-  ) deployed
-  on coalesce(
-    minted.year_month_day,
-    transferred.year_month_day,
-    burned.year_month_day,
-    listed.year_month_day,
-    sold.year_month_day
-  ) = deployed.year_month_day
   -- Unique account/token/contract IDs
   full outer join (
     select
@@ -424,18 +393,15 @@ from (
         token_id,
         nft_contract_id
       from nft_activities
-      where nft_contract_id like '%.mintbase1.near'
-      and nft_contract_id <> 'deadmau5.mintbase1.near'
     ) t
-    group by year_month_day
+    group by year_month_day, nft_contract_id
   ) unique_ids
   on coalesce(
     minted.year_month_day,
     transferred.year_month_day,
     burned.year_month_day,
     listed.year_month_day,
-    sold.year_month_day,
-    deployed.year_month_day
+    sold.year_month_day
   ) = unique_ids.year_month_day
 ) t
 order by year_month_day desc;
