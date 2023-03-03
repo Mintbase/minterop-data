@@ -1,5 +1,4 @@
-- "!include analytics_tmp_referrer_earnings_monthly.yaml" # TODO: deprecate
-- "!include analytics_tmp_referrer_earnings_yearly.yaml" # TODO: deprecate
+- "!include analytics_tmp_affiliate_earnings.yaml"
 - "!include analytics_tmp_affiliate_earnings_monthly.yaml"
 - "!include analytics_tmp_affiliate_earnings_yearly.yaml"
 - "!include mb_views_active_listings_rollup.yaml"
