@@ -167,6 +167,8 @@ pub struct NftContract {
     pub created_receipt_id: Option<String>,
     pub owner_id: Option<String>,
     pub is_mintbase: bool,
+    // content_flag omitted as it is purely manually curated
+    pub category: Option<String>,
 }
 
 // --------------------- specifics for mintbase stores ---------------------- //

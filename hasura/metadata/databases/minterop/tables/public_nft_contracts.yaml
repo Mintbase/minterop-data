@@ -18,5 +18,6 @@ select_permissions:
         - symbol
         - created_at
         - content_flag
+        - category
       filter: {}
       allow_aggregations: true
