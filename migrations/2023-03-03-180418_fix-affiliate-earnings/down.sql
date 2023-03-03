@@ -46,12 +46,6 @@ create view analytics_tmp.referrer_earnings_yearly as
   order by date_trunc, receiver_id
 ;
 
-
--- migrate column in nft_earnings (duplication to give FE and users a grace
--- period for implementing the rename)
-alter table nft_earnings add column is_affiliate boolean;
-update nft_earnings set is_affiliate = is_referral;
-
 -- migrate columns in nft_offers (duplication with same reasoning)
 alter table nft_offers add column affiliate_id text;
 update nft_offers set affiliate_id = referrer_id;
