@@ -26,7 +26,10 @@ create view analytics_tmp.affiliate_earnings_monthly as
     sum(amount) as total_earned,
     count(*) as sales_count
   from (
-	select to_char(timestamp, 'YYYY-MM') as date_trunc, receiver_id, amount
+    select
+      to_date(to_char(timestamp, 'YYYY-MM'), 'YYYY-MM') as date_trunc,
+      receiver_id,
+      amount
     from nft_earnings
     where is_affiliate = TRUE
       and nft_contract_id <> 'deadmau5.mintbase1.near'
@@ -42,7 +45,10 @@ create view analytics_tmp.affiliate_earnings_yearly as
     sum(amount) as total_earned,
     count(*) as sales_count
   from (
-	select to_char(timestamp, 'YYYY') as date_trunc, receiver_id, amount
+    select
+      to_date(to_char(timestamp, 'YYYY'), 'YYYY') as date_trunc,
+      receiver_id,
+      amount
     from nft_earnings
     where is_affiliate = TRUE
       and nft_contract_id <> 'deadmau5.mintbase1.near'
