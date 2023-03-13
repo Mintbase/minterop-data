@@ -65,6 +65,7 @@ table! {
         owner_id -> Nullable<Text>,
         is_mintbase -> Bool,
         content_flag -> Nullable<Text>,
+        category -> Nullable<Text>,
     }
 }
 

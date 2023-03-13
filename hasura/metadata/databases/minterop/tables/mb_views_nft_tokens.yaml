@@ -22,6 +22,16 @@ array_relationships:
         remote_table:
           name: nft_attributes
           schema: public
+object_relationships:
+  - name: nft_contract
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
 select_permissions:
   - role: anonymous
     permission:
