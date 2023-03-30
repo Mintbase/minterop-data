@@ -198,6 +198,7 @@ pub struct NftActivity {
     pub tx_sender: String,
     pub sender_pk: Option<String>,
     pub timestamp: NaiveDateTime,
+    pub blockheight: u64,
     pub nft_contract_id: String,
     pub token_id: String,
     pub kind: String,

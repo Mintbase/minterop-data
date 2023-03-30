@@ -34,5 +34,6 @@ select_permissions:
         - token_id
         - tx_sender
         - timestamp
+        - blockheight
       filter: {}
       allow_aggregations: true
