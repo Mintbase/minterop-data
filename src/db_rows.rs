@@ -284,3 +284,19 @@ pub struct NftEarning {
     pub is_affiliate: bool,
     pub is_mintbase_cut: bool,
 }
+
+#[derive(diesel::Insertable, diesel::Queryable)]
+pub struct NftExternalListing {
+    pub nft_contract_id: String,
+    pub token_id: String,
+    pub market_id: String,
+    pub approval_id: BigDecimal,
+    pub lister_id: Option<String>,
+    pub listing_price: Option<BigDecimal>,
+    pub listed_at: Option<NaiveDateTime>,
+    pub listing_receipt_id: Option<String>,
+    pub buyer_id: Option<String>,
+    pub sale_price: Option<BigDecimal>,
+    pub sold_at: Option<NaiveDateTime>,
+    pub sale_receipt_id: Option<String>,
+}
