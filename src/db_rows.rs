@@ -299,4 +299,8 @@ pub struct NftExternalListing {
     pub sale_price: Option<BigDecimal>,
     pub sold_at: Option<NaiveDateTime>,
     pub sale_receipt_id: Option<String>,
+    pub deleted_at: Option<NaiveDateTime>,
+    pub deleteion_receipt_id: Option<String>,
+    pub failed_at: Option<NaiveDateTime>,
+    pub failure_receipt_id: Option<String>,
 }
