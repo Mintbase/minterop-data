@@ -88,6 +88,23 @@ table! {
 }
 
 table! {
+    nft_external_listings (nft_contract_id, token_id, market_id, approval_id) {
+        nft_contract_id -> Text,
+        token_id -> Text,
+        market_id -> Text,
+        approval_id -> Numeric,
+        lister_id -> Text,
+        listing_price -> Nullable<Numeric>,
+        listed_at -> Nullable<Timestamp>,
+        listing_receipt_id -> Nullable<Text>,
+        buyer_id -> Nullable<Text>,
+        sale_price -> Nullable<Numeric>,
+        sold_at -> Nullable<Timestamp>,
+        sale_receipt_id -> Nullable<Text>,
+    }
+}
+
+table! {
     nft_listings (nft_contract_id, token_id, market_id, approval_id) {
         nft_contract_id -> Text,
         token_id -> Text,
@@ -184,6 +201,7 @@ allow_tables_to_appear_in_same_query!(
     nft_attributes,
     nft_contracts,
     nft_earnings,
+    nft_external_listings,
     nft_listings,
     nft_metadata,
     nft_offers,
