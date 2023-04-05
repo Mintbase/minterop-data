@@ -97,6 +97,7 @@ table! {
         listing_price -> Numeric,
         listed_at -> Timestamp,
         listing_receipt_id -> Text,
+        currency -> Text,
         buyer_id -> Nullable<Text>,
         sale_price -> Nullable<Numeric>,
         sold_at -> Nullable<Timestamp>,

@@ -7,6 +7,7 @@ create table nft_external_listings (
   listing_price numeric not null,
   listed_at timestamp not null,
   listing_receipt_id text not null,
+  currency text not null,
   buyer_id text,
   sale_price numeric,
   sold_at timestamp,

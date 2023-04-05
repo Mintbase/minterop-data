@@ -295,6 +295,7 @@ pub struct NftExternalListing {
     pub listing_price: BigDecimal,
     pub listed_at: NaiveDateTime,
     pub listing_receipt_id: String,
+    pub currency: String,
     pub buyer_id: Option<String>,
     pub sale_price: Option<BigDecimal>,
     pub sold_at: Option<NaiveDateTime>,
