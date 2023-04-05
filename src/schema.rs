@@ -94,13 +94,17 @@ table! {
         market_id -> Text,
         approval_id -> Numeric,
         lister_id -> Text,
-        listing_price -> Nullable<Numeric>,
-        listed_at -> Nullable<Timestamp>,
-        listing_receipt_id -> Nullable<Text>,
+        listing_price -> Numeric,
+        listed_at -> Timestamp,
+        listing_receipt_id -> Text,
         buyer_id -> Nullable<Text>,
         sale_price -> Nullable<Numeric>,
         sold_at -> Nullable<Timestamp>,
         sale_receipt_id -> Nullable<Text>,
+        deleted_at -> Nullable<Timestamp>,
+        deletion_receipt_id -> Nullable<Text>,
+        failed_at -> Nullable<Timestamp>,
+        failure_receipt_id -> Nullable<Text>,
     }
 }
 
