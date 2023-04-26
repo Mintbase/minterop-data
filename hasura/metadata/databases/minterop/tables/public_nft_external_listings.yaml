@@ -1,0 +1,56 @@
+table:
+  schema: public
+  name: nft_external_listings
+object_relationships:
+  - name: nft_contract
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+  - name: nft_token
+    using:
+      manual_configuration:
+        remote_table:
+          schema: mb_views
+          name: nft_tokens
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+  - name: token
+    using:
+      manual_configuration:
+        remote_table:
+          schema: mb_views
+          name: nft_tokens
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - nft_contract_id
+        - token_id
+        - market_id
+        - approval_id
+        - lister_id
+        - listing_price
+        - listed_at
+        - listing_receipt_id
+        - currency
+        - buyer_id
+        - sale_price
+        - sold_at
+        - sale_receipt_id
+        - deleted_at
+        - deletion_receipt_id
+        - failed_at
+        - failure_receipt_id
+      filter: {}
+      allow_aggregations: true
