@@ -7,6 +7,7 @@ select_permissions:
       columns:
         - date_trunc
         - affiliate_id
+        - currency
         - sales_count
         - total_earned
       filter: {}

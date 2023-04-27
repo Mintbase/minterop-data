@@ -30,6 +30,7 @@ select_permissions:
         - memo
         - nft_contract_id
         - price
+        - currency
         - receipt_id
         - token_id
         - tx_sender

@@ -207,6 +207,7 @@ pub struct NftActivity {
     pub memo: Option<String>,
     /// only on listing events
     pub price: Option<BigDecimal>,
+    pub currency: Option<String>,
 }
 
 // TODO: replace with enum?
