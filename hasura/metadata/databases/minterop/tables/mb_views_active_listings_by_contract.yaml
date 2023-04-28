@@ -41,6 +41,7 @@ select_permissions:
         - nft_contract_id
         - base_uri
         - price
+        - currency
         - created_at
         - metadata_id
         - token_id
