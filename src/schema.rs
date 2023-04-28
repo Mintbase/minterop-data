@@ -26,6 +26,7 @@ table! {
         action_receiver -> Nullable<Text>,
         memo -> Nullable<Text>,
         price -> Nullable<Numeric>,
+        currency -> Nullable<Text>,
     }
 }
 

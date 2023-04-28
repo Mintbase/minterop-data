@@ -6,6 +6,7 @@ select_permissions:
     permission:
       columns:
         - affiliate_id
+        - currency
         - sales_count
         - total_earned
       filter: {}
