@@ -22,7 +22,6 @@ select_permissions:
         - action_sender
         - action_receiver
         - price
-        - currency
         - reference
         - reference_blob
         - metadata_id
