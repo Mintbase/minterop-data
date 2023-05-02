@@ -25,6 +25,7 @@ select_permissions:
         - minted_timestamp
         - minter
         - price
+        - currency
         - base_uri
         - content_flag
       filter: {}

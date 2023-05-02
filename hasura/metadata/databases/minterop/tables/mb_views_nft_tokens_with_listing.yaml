@@ -21,6 +21,7 @@ select_permissions:
         - metadata_id
         - reference_blob
         - price
+        - currency
         - content_flag
       filter: {}
       allow_aggregations: true
