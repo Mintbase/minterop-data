@@ -3,8 +3,8 @@
     queries:
       - name: All Stores Endpoint
         query: |-
-          query getAllStores($limit: Int = 2000, $offset: Int = 0) {
-            store: nft_contracts(limit: $limit, offset: $offset) {
+          query getAllStores($limit: Int = 5000, $offset: Int = 0) {
+            store: nft_contracts(limit: $limit, offset: $offset, where: {id: {_like: "%.mintbase1.near"}}) {
               id
               name
               symbol
