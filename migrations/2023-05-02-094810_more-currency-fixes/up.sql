@@ -26,7 +26,9 @@ left join lateral (
   limit 1
 ) t on true
 left join lateral (
-  select p.price
+  select
+    p.price,
+    p.currency
   from nft_listings p
   where
     p.unlisted_at is null and
