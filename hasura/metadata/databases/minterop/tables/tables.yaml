@@ -9,6 +9,7 @@
 - "!include mb_views_nft_activities_rollup.yaml"
 - "!include mb_views_nft_metadata_unburned.yaml"
 - "!include mb_views_nft_metadata.yaml"
+- "!include mb_views_nft_notifications.yaml"
 - "!include mb_views_nft_tokens_with_listing.yaml"
 - "!include mb_views_nft_tokens.yaml"
 - "!include mb_views_nft_tokens_with_media.yaml"
