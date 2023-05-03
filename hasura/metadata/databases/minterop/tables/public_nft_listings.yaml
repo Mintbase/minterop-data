@@ -74,5 +74,6 @@ select_permissions:
         - created_at
         - unlisted_at
         - invalidated_at
+        - failed_at
       filter: {}
       allow_aggregations: true
