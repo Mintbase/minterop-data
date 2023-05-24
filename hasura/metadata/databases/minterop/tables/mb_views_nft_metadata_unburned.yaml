@@ -26,7 +26,6 @@ select_permissions:
         - minter
         - price
         - currency
-        - listed_by
         - base_uri
         - content_flag
       filter: {}
