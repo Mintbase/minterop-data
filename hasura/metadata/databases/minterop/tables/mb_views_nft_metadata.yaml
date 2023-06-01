@@ -32,7 +32,6 @@ select_permissions:
         - description
         - extra
         - id
-        - reference
         - media
         - media_hash
         - metadata_content_flag

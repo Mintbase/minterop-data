@@ -1,5 +1,4 @@
 drop view mb_views.nft_metadata_unburned;
-drop view mb_views.nft_metadata;
 
 create view mb_views.nft_metadata_unburned as
   select md.id as metadata_id,
@@ -44,27 +43,3 @@ create view mb_views.nft_metadata_unburned as
     limit 1
   ) l on true
   where coalesce(t.last_transfer_timestamp, t.minted_timestamp) is not null;
-
-create view mb_views.nft_metadata as
-  select
-    m.id,
-    m.nft_contract_id,
-    m.reference_blob,
-    m.title,
-    m.description,
-    m.reference,
-    m.media,
-    m.media_hash,
-    m.extra,
-    m.content_flag as metadata_content_flag,
-    c.name as nft_contract_name,
-    c.symbol as nft_contract_symbol,
-    c.icon as nft_contract_icon,
-    c.spec as nft_contract_spec,
-    c.base_uri,
-    c.reference as nft_contract_reference,
-    c.created_at as nft_contract_created_at,
-    c.owner_id as nft_contract_owner_id,
-    c.is_mintbase as nft_contract_is_mintbase,
-    c.content_flag as nft_contract_content_flag
-  from nft_metadata m left join nft_contracts c on m.nft_contract_id = c.id;
