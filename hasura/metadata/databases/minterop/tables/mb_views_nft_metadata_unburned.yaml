@@ -18,6 +18,7 @@ select_permissions:
         - metadata_id
         - title
         - description
+        - reference
         - media
         - reference_blob
         - base_uri
