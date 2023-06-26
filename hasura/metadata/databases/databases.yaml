@@ -6,4 +6,35 @@
       database_url:
         from_env: HASURA_POSTGRES
       isolation_level: read-committed
+  logical_models:
+    - name: launchpad_contracts_model
+      fields:
+        - name: nft_contract_id
+          type: text
+        - name: minted_timestamp
+          type: timestamp
+      select_permissions:
+        - role: anonymous
+          permission:
+            columns:
+              - nft_contract_id
+              - minted_timestamp
+            filter: {}
+            allow_aggregations: true
+  native_queries:
+    - root_field_name: launchpad_contracts
+      arguments:
+        minter_id:
+          type: text
+      code: |
+        SELECT m.nft_contract_id, t.minted_timestamp
+        FROM (SELECT * FROM mb_store_minters WHERE minter_id = {{minter_id}}) m
+        LEFT JOIN (
+          SELECT DISTINCT ON(nft_contract_id) nft_contract_id, minted_timestamp, minter
+          FROM nft_tokens
+          WHERE minter = {{minter_id}}
+        ) t
+        ON t.minter = m.minter_id AND t.nft_contract_id = m.nft_contract_id
+        ORDER BY minted_timestamp DESC NULLS LAST
+      returns: launchpad_contracts_model
   tables: "!include minterop/tables/tables.yaml"
