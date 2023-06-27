@@ -33,9 +33,12 @@
         SELECT m.nft_contract_id, t.minted_timestamp, c.owner_id
         FROM (SELECT * FROM mb_store_minters WHERE minter_id = {{minter_id}}) m
         LEFT JOIN (
-          SELECT DISTINCT ON(nft_contract_id) nft_contract_id, minted_timestamp, minter
-          FROM nft_tokens
-          WHERE minter = {{minter_id}}
+         SELECT DISTINCT ON(nft_contract_id) * FROM (
+            SELECT nft_contract_id, minted_timestamp, minter
+            FROM nft_tokens
+            WHERE minter = {{minter_id}}
+            ORDER BY minted_timestamp DESC NULLS LAST
+          ) _t
         ) t
         ON t.minter = m.minter_id AND t.nft_contract_id = m.nft_contract_id
         LEFT JOIN (SELECT id, owner_id FROM nft_contracts) c
