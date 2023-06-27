@@ -13,12 +13,15 @@
           type: text
         - name: minted_timestamp
           type: timestamp
+        - name: owner_id
+          type: text
       select_permissions:
         - role: anonymous
           permission:
             columns:
               - nft_contract_id
               - minted_timestamp
+              - owner_id
             filter: {}
             allow_aggregations: true
   native_queries:
@@ -27,7 +30,7 @@
         minter_id:
           type: text
       code: |
-        SELECT m.nft_contract_id, t.minted_timestamp
+        SELECT m.nft_contract_id, t.minted_timestamp, c.owner_id
         FROM (SELECT * FROM mb_store_minters WHERE minter_id = {{minter_id}}) m
         LEFT JOIN (
           SELECT DISTINCT ON(nft_contract_id) nft_contract_id, minted_timestamp, minter
@@ -35,6 +38,8 @@
           WHERE minter = {{minter_id}}
         ) t
         ON t.minter = m.minter_id AND t.nft_contract_id = m.nft_contract_id
+        LEFT JOIN (SELECT id, owner_id FROM nft_contracts) c
+        ON c.id = m.nft_contract_id
         ORDER BY minted_timestamp DESC NULLS LAST
       returns: launchpad_contracts_model
   tables: "!include minterop/tables/tables.yaml"
