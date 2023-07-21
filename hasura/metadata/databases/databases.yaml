@@ -41,8 +41,8 @@
           ) _t
         ) t
         ON t.minter = m.minter_id AND t.nft_contract_id = m.nft_contract_id
-        LEFT JOIN (SELECT id, owner_id FROM nft_contracts) c
+        LEFT JOIN (SELECT id, owner_id, created_at FROM nft_contracts) c
         ON c.id = m.nft_contract_id
-        ORDER BY minted_timestamp DESC NULLS LAST
+        ORDER BY GREATEST(minted_timestamp, created_at) DESC NULLS LAST
       returns: launchpad_contracts_model
   tables: "!include minterop/tables/tables.yaml"
