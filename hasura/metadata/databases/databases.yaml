@@ -13,6 +13,8 @@
           type: text
         - name: minted_timestamp
           type: timestamp
+        - name: created_at
+          type: timestamp
         - name: owner_id
           type: text
       select_permissions:
@@ -30,15 +32,16 @@
         minter_id:
           type: text
       code: |
-        SELECT m.nft_contract_id, t.minted_timestamp, c.owner_id
+        SELECT m.nft_contract_id, t.minted_timestamp, c.owner_id, c.created_at
         FROM (SELECT * FROM mb_store_minters WHERE minter_id = {{minter_id}}) m
         LEFT JOIN (
-         SELECT DISTINCT ON(nft_contract_id) * FROM (
-            SELECT nft_contract_id, minted_timestamp, minter
+          SELECT * FROM (
+            SELECT DISTINCT ON(nft_contract_id) nft_contract_id, minted_timestamp, minter
             FROM nft_tokens
             WHERE minter = {{minter_id}}
-            ORDER BY minted_timestamp DESC NULLS LAST
+            ORDER BY nft_contract_id, minted_timestamp DESC NULLS LAST
           ) _t
+          ORDER BY minted_timestamp DESC NULLS LAST
         ) t
         ON t.minter = m.minter_id AND t.nft_contract_id = m.nft_contract_id
         LEFT JOIN (SELECT id, owner_id, created_at FROM nft_contracts) c
