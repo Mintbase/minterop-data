@@ -11,6 +11,25 @@ object_relationships:
         insertion_order: null
         column_mapping:
           nft_contract_id: id
+  - name: nft_token
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_tokens
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: nft_contract_id
+          token_id: token_id
+  - name: nft_metadata
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_metadata
+        insertion_order: null
+        column_mapping:
+          metadata_id: id
 select_permissions:
   - role: anonymous
     permission:
@@ -19,9 +38,15 @@ select_permissions:
         - token_id
         - owner
         - metadata_id
-        - reference_blob
+        - minted_timestamp
+        - last_transfer_timestamp
         - price
         - currency
+        - market_id
+        - listing_kind
+        - reference_blob
         - content_flag
+        - title
+        - description
       filter: {}
       allow_aggregations: true
