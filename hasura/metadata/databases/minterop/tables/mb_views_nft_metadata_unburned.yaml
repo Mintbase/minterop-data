@@ -28,6 +28,7 @@ select_permissions:
         - price
         - currency
         - listed_by
+        - listing_created_at
         - base_uri
         - content_flag
       filter: {}
