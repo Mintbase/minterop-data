@@ -5,6 +5,27 @@ table! {
 }
 
 table! {
+    ft_activities (receipt_id, ft_contract_id, kind) {
+        receipt_id -> Text,
+        timestamp -> Timestamp,
+        ft_contract_id -> Text,
+        kind -> Text,
+        action_sender -> Nullable<Text>,
+        action_receiver -> Nullable<Text>,
+        memo -> Nullable<Text>,
+        amount -> Numeric,
+    }
+}
+
+table! {
+    ft_balances (ft_contract_id, owner) {
+        ft_contract_id -> Text,
+        owner -> Text,
+        amount -> Numeric,
+    }
+}
+
+table! {
     mb_store_minters (nft_contract_id, minter_id) {
         nft_contract_id -> Text,
         minter_id -> Text,
@@ -201,6 +222,8 @@ table! {
 
 allow_tables_to_appear_in_same_query!(
     blocks,
+    ft_activities,
+    ft_balances,
     mb_store_minters,
     nft_activities,
     nft_approvals,

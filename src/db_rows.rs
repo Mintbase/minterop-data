@@ -1,4 +1,4 @@
-use bigdecimal::BigDecimal;
+use bigdecimal::{BigDecimal, Zero};
 use chrono::NaiveDateTime;
 
 // ----------------------- core/interop functionality ----------------------- //
@@ -171,6 +171,23 @@ pub struct NftContract {
     pub category: Option<String>,
 }
 
+#[derive(diesel::Insertable, diesel::Queryable, Clone)]
+pub struct FtBalance {
+    pub ft_contract_id: String,
+    pub owner: String,
+    pub amount: BigDecimal,
+}
+
+impl FtBalance {
+    pub fn empty() -> Self {
+        FtBalance {
+            ft_contract_id: "".to_string(),
+            owner: "".to_string(),
+            amount: BigDecimal::zero(),
+        }
+    }
+}
+
 // --------------------- specifics for mintbase stores ---------------------- //
 #[derive(diesel::Insertable, diesel::Queryable)]
 pub struct NftApproval {
@@ -208,6 +225,19 @@ pub struct NftActivity {
     /// only on listing events
     pub price: Option<BigDecimal>,
     pub currency: Option<String>,
+}
+
+#[derive(diesel::Insertable, diesel::Queryable)]
+#[table_name = "ft_activities"]
+pub struct FtActivity {
+    pub receipt_id: String,
+    pub timestamp: NaiveDateTime,
+    pub ft_contract_id: String,
+    pub kind: String,
+    pub action_sender: String,
+    pub action_receiver: Option<String>,
+    pub memo: Option<String>,
+    pub amount: BigDecimal,
 }
 
 // TODO: replace with enum?
