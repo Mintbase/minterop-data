@@ -16,5 +16,5 @@ create table ft_activities (
   action_receiver text,
   memo            text,
   amount          numeric,
-  primary key(receipt_id, ft_contract_id, kind)
+  primary key(receipt_id, ft_contract_id, kind, action_sender, action_receiver)
 );
