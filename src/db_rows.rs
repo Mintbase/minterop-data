@@ -336,3 +336,12 @@ pub struct NftExternalListing {
     pub failed_at: Option<NaiveDateTime>,
     pub failure_receipt_id: Option<String>,
 }
+
+#[derive(diesel::Insertable, diesel::Queryable)]
+pub struct AccessKey {
+    pub account_id: String,
+    pub public_key: String,
+    pub permissions: Option<serde_json::Value>,
+    pub created_at: NaiveDateTime,
+    pub removed_at: Option<NaiveDateTime>,
+}
