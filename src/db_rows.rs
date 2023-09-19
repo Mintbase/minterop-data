@@ -345,3 +345,15 @@ pub struct AccessKey {
     pub created_at: NaiveDateTime,
     pub removed_at: Option<NaiveDateTime>,
 }
+
+#[derive(diesel::Insertable, diesel::Queryable, diesel::AsChangeset, Clone)]
+pub struct Account {
+    pub account_id: String,
+    pub amount: String,
+    pub locked: String,
+    pub code_hash: String,
+    pub storage_usage: BigDecimal,
+    pub storage_paid_at: BigDecimal,
+    pub created_at: NaiveDateTime,
+    pub removed_at: Option<NaiveDateTime>
+}

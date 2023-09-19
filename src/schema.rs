@@ -11,6 +11,19 @@ diesel::table! {
 }
 
 diesel::table! {
+    accounts (account_id) {
+        account_id -> Text,
+        amount -> Text,
+        locked -> Text,
+        code_hash -> Text,
+        storage_usage -> Numeric,
+        storage_paid_at -> Numeric,
+        created_at -> Timestamp,
+        removed_at -> Nullable<Timestamp>,
+    }
+}
+
+diesel::table! {
     blocks (synced_height) {
         synced_height -> Int8,
     }
@@ -234,6 +247,7 @@ diesel::table! {
 
 diesel::allow_tables_to_appear_in_same_query!(
     access_keys,
+    accounts,
     blocks,
     ft_activities,
     ft_balances,
