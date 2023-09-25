@@ -26,6 +26,7 @@ diesel::table! {
 diesel::table! {
     blocks (synced_height) {
         synced_height -> Int8,
+        synced_height_tmp -> Nullable<Int8>,
     }
 }
 
