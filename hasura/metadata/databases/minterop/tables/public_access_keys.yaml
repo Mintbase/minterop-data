@@ -1,11 +1,14 @@
 table:
   schema: public
-  name: blocks
+  name: access_keys
 select_permissions:
   - role: anonymous
     permission:
       columns:
-        - synced_height
-        - synced_height_tmp
+        - account_id
+        - public_key
+        - permissions
+        - created_at
+        - removed_at
       filter: {}
       allow_aggregations: true

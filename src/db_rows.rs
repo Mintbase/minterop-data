@@ -1,4 +1,7 @@
-use bigdecimal::{BigDecimal, Zero};
+use bigdecimal::{
+    BigDecimal,
+    Zero,
+};
 use chrono::NaiveDateTime;
 
 // ----------------------- core/interop functionality ----------------------- //
@@ -355,5 +358,5 @@ pub struct Account {
     pub storage_usage: BigDecimal,
     pub storage_paid_at: BigDecimal,
     pub created_at: NaiveDateTime,
-    pub removed_at: Option<NaiveDateTime>
+    pub removed_at: Option<NaiveDateTime>,
 }

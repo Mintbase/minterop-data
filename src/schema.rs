@@ -30,27 +30,6 @@ diesel::table! {
 }
 
 diesel::table! {
-    ft_activities (receipt_id, ft_contract_id, kind, action_sender, action_receiver) {
-        receipt_id -> Text,
-        timestamp -> Timestamp,
-        ft_contract_id -> Text,
-        kind -> Text,
-        action_sender -> Text,
-        action_receiver -> Text,
-        memo -> Nullable<Text>,
-        amount -> Nullable<Numeric>,
-    }
-}
-
-diesel::table! {
-    ft_balances (ft_contract_id, owner) {
-        ft_contract_id -> Text,
-        owner -> Text,
-        amount -> Numeric,
-    }
-}
-
-diesel::table! {
     mb_store_minters (nft_contract_id, minter_id) {
         nft_contract_id -> Text,
         minter_id -> Text,
@@ -249,8 +228,6 @@ diesel::allow_tables_to_appear_in_same_query!(
     access_keys,
     accounts,
     blocks,
-    ft_activities,
-    ft_balances,
     mb_store_minters,
     nft_activities,
     nft_approvals,

@@ -1,0 +1,17 @@
+table:
+  schema: public
+  name: accounts
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - account_id
+        - amount
+        - locked
+        - code_hash
+        - storage_usage
+        - storage_paid_at
+        - created_at
+        - removed_at
+      filter: {}
+      allow_aggregations: true
