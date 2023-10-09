@@ -7,7 +7,6 @@ select_permissions:
       columns:
         - account_id
         - public_key
-        - permissions
         - created_at
         - removed_at
       filter: {}
