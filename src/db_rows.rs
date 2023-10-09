@@ -311,7 +311,6 @@ pub struct NftExternalListing {
 pub struct AccessKey {
     pub account_id: String,
     pub public_key: String,
-    pub permissions: Option<serde_json::Value>,
     pub created_at: NaiveDateTime,
     pub removed_at: Option<NaiveDateTime>,
 }

@@ -4,7 +4,6 @@ diesel::table! {
     access_keys (account_id, public_key, created_at) {
         account_id -> Text,
         public_key -> Text,
-        permissions -> Nullable<Jsonb>,
         created_at -> Timestamp,
         removed_at -> Nullable<Timestamp>,
     }
