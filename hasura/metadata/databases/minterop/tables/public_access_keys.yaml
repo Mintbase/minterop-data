@@ -8,6 +8,8 @@ select_permissions:
         - account_id
         - public_key
         - created_at
+        - created_receipt_id
         - removed_at
+        - removed_receipt_id
       filter: {}
       allow_aggregations: true
