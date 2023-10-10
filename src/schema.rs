@@ -5,20 +5,20 @@ diesel::table! {
         account_id -> Text,
         public_key -> Text,
         created_at -> Timestamp,
+        created_receipt_id -> Text,
         removed_at -> Nullable<Timestamp>,
+        removed_receipt_id -> Nullable<Text>,
     }
 }
 
 diesel::table! {
-    accounts (account_id) {
+    accounts (account_id, created_at) {
         account_id -> Text,
-        amount -> Text,
-        locked -> Text,
-        code_hash -> Text,
-        storage_usage -> Numeric,
-        storage_paid_at -> Numeric,
         created_at -> Timestamp,
+        created_receipt_id -> Text,
         removed_at -> Nullable<Timestamp>,
+        removed_receipt_id -> Nullable<Text>,
+        beneficiary_id -> Nullable<Text>,
     }
 }
 
