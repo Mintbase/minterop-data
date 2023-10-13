@@ -16,6 +16,8 @@
 - "!include mb_views_nft_tokens_with_media.yaml"
 - "!include mb_views_nft_owned_tokens.yaml"
 - "!include mb_views_top_stores.yaml"
+- "!include public_accounts.yaml"
+- "!include public_access_keys.yaml"
 - "!include public_blocks.yaml"
 - "!include public_mb_store_minters.yaml"
 - "!include public_nft_activities.yaml"
