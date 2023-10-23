@@ -6,5 +6,6 @@ select_permissions:
     permission:
       columns:
         - synced_height
+        - synced_height_tmp
       filter: {}
       allow_aggregations: true

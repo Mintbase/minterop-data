@@ -1,0 +1,15 @@
+table:
+  schema: public
+  name: accounts
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - account_id
+        - created_at
+        - created_receipt_id
+        - removed_at
+        - removed_receipt_id
+        - beneficiary_id
+      filter: {}
+      allow_aggregations: true

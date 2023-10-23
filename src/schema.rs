@@ -1,10 +1,35 @@
-table! {
+// @generated automatically by Diesel CLI.
+
+diesel::table! {
+    access_keys_bak (account_id, public_key, created_at) {
+        account_id -> Text,
+        public_key -> Text,
+        permissions -> Nullable<Jsonb>,
+        created_at -> Timestamp,
+        removed_at -> Nullable<Timestamp>,
+    }
+}
+
+diesel::table! {
+    accounts_bak (account_id) {
+        account_id -> Text,
+        amount -> Text,
+        locked -> Text,
+        code_hash -> Text,
+        storage_usage -> Numeric,
+        storage_paid_at -> Numeric,
+        created_at -> Timestamp,
+        removed_at -> Nullable<Timestamp>,
+    }
+}
+
+diesel::table! {
     blocks (synced_height) {
         synced_height -> Int8,
     }
 }
 
-table! {
+diesel::table! {
     mb_store_minters (nft_contract_id, minter_id) {
         nft_contract_id -> Text,
         minter_id -> Text,
@@ -13,7 +38,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_activities (receipt_id, nft_contract_id, token_id, kind) {
         receipt_id -> Text,
         tx_sender -> Text,
@@ -30,7 +55,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_approvals (nft_contract_id, token_id, approved_account_id) {
         nft_contract_id -> Text,
         token_id -> Text,
@@ -41,7 +66,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_attributes (nft_metadata_id, nft_contract_id, attribute_type) {
         nft_metadata_id -> Text,
         nft_contract_id -> Text,
@@ -51,7 +76,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_contracts (id) {
         id -> Text,
         spec -> Text,
@@ -70,7 +95,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_earnings (nft_contract_id, token_id, market_id, approval_id, receiver_id, is_referral, is_mintbase_cut) {
         nft_contract_id -> Text,
         token_id -> Text,
@@ -88,7 +113,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_external_listings (nft_contract_id, token_id, market_id, approval_id) {
         nft_contract_id -> Text,
         token_id -> Text,
@@ -110,7 +135,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_listings (nft_contract_id, token_id, market_id, approval_id) {
         nft_contract_id -> Text,
         token_id -> Text,
@@ -130,7 +155,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_metadata (id) {
         id -> Text,
         nft_contract_id -> Text,
@@ -144,11 +169,12 @@ table! {
         extra -> Nullable<Text>,
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
+        old_id -> Nullable<Text>,
         content_flag -> Nullable<Text>,
     }
 }
 
-table! {
+diesel::table! {
     nft_offers (nft_contract_id, token_id, market_id, approval_id, offer_id) {
         nft_contract_id -> Text,
         token_id -> Text,
@@ -172,7 +198,7 @@ table! {
     }
 }
 
-table! {
+diesel::table! {
     nft_tokens (nft_contract_id, token_id) {
         nft_contract_id -> Text,
         token_id -> Text,
@@ -199,7 +225,9 @@ table! {
     }
 }
 
-allow_tables_to_appear_in_same_query!(
+diesel::allow_tables_to_appear_in_same_query!(
+    access_keys_bak,
+    accounts_bak,
     blocks,
     mb_store_minters,
     nft_activities,

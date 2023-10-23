@@ -306,3 +306,23 @@ pub struct NftExternalListing {
     pub failed_at: Option<NaiveDateTime>,
     pub failure_receipt_id: Option<String>,
 }
+
+#[derive(diesel::Insertable, diesel::Queryable)]
+pub struct AccessKey {
+    pub account_id: String,
+    pub public_key: String,
+    pub created_at: NaiveDateTime,
+    pub created_receipt_id: String,
+    pub removed_at: Option<NaiveDateTime>,
+    pub removed_receipt_id: Option<String>,
+}
+
+#[derive(diesel::Insertable, diesel::Queryable, diesel::AsChangeset, Clone)]
+pub struct Account {
+    pub account_id: String,
+    pub created_at: NaiveDateTime,
+    pub created_receipt_id: String,
+    pub removed_at: Option<NaiveDateTime>,
+    pub removed_receipt_id: Option<String>,
+    pub beneficiary_id: Option<String>,
+}
