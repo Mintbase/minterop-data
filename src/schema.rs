@@ -1,7 +1,7 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    access_keys (account_id, public_key, created_at) {
+    access_keys_bak (account_id, public_key, created_at) {
         account_id -> Text,
         public_key -> Text,
         permissions -> Nullable<Jsonb>,
@@ -11,7 +11,7 @@ diesel::table! {
 }
 
 diesel::table! {
-    accounts (account_id) {
+    accounts_bak (account_id) {
         account_id -> Text,
         amount -> Text,
         locked -> Text,
@@ -26,7 +26,6 @@ diesel::table! {
 diesel::table! {
     blocks (synced_height) {
         synced_height -> Int8,
-        synced_height_tmp -> Nullable<Int8>,
     }
 }
 
@@ -170,6 +169,7 @@ diesel::table! {
         extra -> Nullable<Text>,
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
+        old_id -> Nullable<Text>,
         content_flag -> Nullable<Text>,
     }
 }
@@ -226,8 +226,8 @@ diesel::table! {
 }
 
 diesel::allow_tables_to_appear_in_same_query!(
-    access_keys,
-    accounts,
+    access_keys_bak,
+    accounts_bak,
     blocks,
     mb_store_minters,
     nft_activities,

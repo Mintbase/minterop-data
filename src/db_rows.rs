@@ -311,19 +311,18 @@ pub struct NftExternalListing {
 pub struct AccessKey {
     pub account_id: String,
     pub public_key: String,
-    pub permissions: Option<serde_json::Value>,
     pub created_at: NaiveDateTime,
+    pub created_receipt_id: String,
     pub removed_at: Option<NaiveDateTime>,
+    pub removed_receipt_id: Option<String>,
 }
 
 #[derive(diesel::Insertable, diesel::Queryable, diesel::AsChangeset, Clone)]
 pub struct Account {
     pub account_id: String,
-    pub amount: String,
-    pub locked: String,
-    pub code_hash: String,
-    pub storage_usage: BigDecimal,
-    pub storage_paid_at: BigDecimal,
     pub created_at: NaiveDateTime,
+    pub created_receipt_id: String,
     pub removed_at: Option<NaiveDateTime>,
+    pub removed_receipt_id: Option<String>,
+    pub beneficiary_id: Option<String>,
 }

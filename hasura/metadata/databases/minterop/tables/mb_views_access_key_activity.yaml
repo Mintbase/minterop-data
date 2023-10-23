@@ -1,15 +1,14 @@
 table:
-  schema: public
-  name: access_keys
+  schema: mb_views
+  name: access_key_activity
 select_permissions:
   - role: anonymous
     permission:
       columns:
+        - timestamp
+        - receipt_id
         - account_id
         - public_key
-        - created_at
-        - created_receipt_id
-        - removed_at
-        - removed_receipt_id
+        - kind
       filter: {}
       allow_aggregations: true
