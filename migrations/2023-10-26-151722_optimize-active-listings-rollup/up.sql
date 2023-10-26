@@ -32,5 +32,4 @@ create view mb_views.active_listings_rollup as
      select *
      from nft_metadata m0
      where m0.id = l.metadata_id
-     order by created_at desc nulls last
    ) m on true;
