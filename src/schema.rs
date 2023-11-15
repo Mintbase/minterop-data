@@ -170,6 +170,7 @@ diesel::table! {
         minter -> Nullable<Text>,
         base_uri -> Nullable<Text>,
         content_flag -> Nullable<Text>,
+        mb_internal_id -> Nullable<Numeric>,
     }
 }
 
