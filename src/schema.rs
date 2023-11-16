@@ -171,6 +171,8 @@ diesel::table! {
         base_uri -> Nullable<Text>,
         content_flag -> Nullable<Text>,
         mb_internal_id -> Nullable<Numeric>,
+        price -> Nullable<Numeric>,
+        minters_allowlist -> Nullable<Array<Nullable<Text>>>,
     }
 }
 
