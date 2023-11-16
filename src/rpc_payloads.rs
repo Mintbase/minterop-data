@@ -20,6 +20,8 @@ pub enum RpcMessage {
     HandleMetadataPayload {
         contract_id: String,
         metadata_id: u64,
+        minters_allowlist: Option<Vec<String>>,
+        price: String,
         refresh: Option<bool>,
         creator: String,
     },
@@ -56,11 +58,15 @@ impl RpcMessage {
     pub fn from_metadata(
         contract_id: String,
         metadata_id: u64,
+        minters_allowlist: Option<Vec<String>>,
+        price: u128,
         creator: String,
     ) -> Self {
         Self::HandleMetadataPayload {
             contract_id,
             metadata_id,
+            minters_allowlist,
+            price: price.to_string(),
             refresh: Some(false),
             creator,
         }
