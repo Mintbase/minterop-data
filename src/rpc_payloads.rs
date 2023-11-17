@@ -19,7 +19,7 @@ pub enum RpcMessage {
     #[serde(rename = "metadata")]
     HandleMetadataPayload {
         contract_id: String,
-        metadata_id: u64,
+        metadata_id: String,
         minters_allowlist: Option<Vec<String>>,
         price: String,
         refresh: Option<bool>,
@@ -64,7 +64,7 @@ impl RpcMessage {
     ) -> Self {
         Self::HandleMetadataPayload {
             contract_id,
-            metadata_id,
+            metadata_id: metadata_id.to_string(),
             minters_allowlist,
             price: price.to_string(),
             refresh: Some(false),
