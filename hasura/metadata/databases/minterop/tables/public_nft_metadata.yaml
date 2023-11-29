@@ -35,5 +35,8 @@ select_permissions:
         - title
         - base_uri
         - content_flag
+        - mb_internal_id
+        - price
+        - minters_allowlist
       filter: {}
       allow_aggregations: true

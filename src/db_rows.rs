@@ -88,6 +88,9 @@ pub struct NftMetadata {
     pub extra: Option<String>,
     pub minter: Option<String>,
     pub base_uri: Option<String>,
+    pub mb_internal_id: Option<BigDecimal>,
+    pub price: Option<BigDecimal>,
+    pub minters_allowlist: Option<Vec<String>>,
 }
 
 impl NftMetadata {
@@ -124,6 +127,9 @@ impl NftMetadata {
             extra: None,
             minter: None,   // FIXME: make sure this is always added
             base_uri: None, // FIXME: make sure this is always added
+            mb_internal_id: None,
+            price: None,
+            minters_allowlist: None,
         }
     }
 
