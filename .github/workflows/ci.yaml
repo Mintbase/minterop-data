@@ -27,15 +27,12 @@ jobs:
       - name: Rust setup
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly # TODO: back to stable once fmt features are stable
+          toolchain: nightly-2023-10-24 # TODO: back to stable once fmt features are stable
           default: true
           override: true
           components: rustfmt, clippy
 
       - name: shftmt setup
-        uses: mfinelli/setup-shfmt@v1
-
-      - name: shellcheck setup
         uses: mfinelli/setup-shfmt@v1
 
       - name: taplo setup
