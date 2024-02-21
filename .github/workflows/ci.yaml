@@ -65,7 +65,7 @@ jobs:
       - name: Linting
         # TODO: shellcheck (https://github.com/marketplace/actions/shellcheck)
         run: |
-          cargo clippy -- -D warnings
+          cargo +stable clippy -- -D warnings
 
       - name: Diesel setup
         # TODO: use precompiled once feasible (https://github.com/diesel-rs/diesel/issues/2379)
