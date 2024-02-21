@@ -43,18 +43,6 @@ jobs:
       - name: Prettier setup
         run: sudo apt-get install npm && npm install --global prettier
 
-      # FIXME: remove
-      - name: Print versions
-        run: |
-          rustup show
-          cargo --version
-          cargo fmt -- --version
-          cargo +nightly fmt -- --version
-          cargo clippy -- --version
-          cargo +nightly clippy -- --version
-          rustfmt --version
-          rustc --version
-
       - name: Formatting
         run: |
           cargo +nightly fmt -- --check
