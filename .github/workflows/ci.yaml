@@ -45,6 +45,7 @@ jobs:
 
       - name: Formatting
         run: |
+          rustup toolchain add nightly
           cargo +nightly fmt -- --check
           shfmt -i 2 -d .
           taplo fmt **/*.toml --check
