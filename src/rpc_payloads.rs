@@ -64,11 +64,11 @@ impl RpcMessage {
         metadata_id: u64,
         minters_allowlist: Option<Vec<String>>,
         price: u128,
-        creator: String,
         royalties: Option<serde_json::Value>,
         max_supply: Option<u32>,
         last_possible_mint: Option<u64>,
         is_locked: bool,
+        creator: String,
     ) -> Self {
         Self::HandleMetadataPayload {
             contract_id,
