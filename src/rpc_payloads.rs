@@ -1,4 +1,7 @@
-use serde::{Deserialize, Serialize};
+use serde::{
+    Deserialize,
+    Serialize,
+};
 
 type RoyaltiesMap = std::collections::HashMap<String, u16>;
 
@@ -62,6 +65,7 @@ impl RpcMessage {
         }
     }
 
+    #[allow(clippy::too_many_arguments)] // Forgive me father for I have sinned
     pub fn from_metadata(
         contract_id: String,
         metadata_id: u64,
@@ -108,7 +112,8 @@ impl RpcMessage {
 mod tests {
     use super::*;
     use crate::rpc_payloads::RpcMessage::{
-        HandleContractPayload, HandleTokenPayload,
+        HandleContractPayload,
+        HandleTokenPayload,
     };
     const CONTRACT_PAYLOAD_STR: &str = r#"{"kind":"contract","payload":{"contract_id":"foo.near","refresh":null}}"#;
     const TOKEN_PAYLOAD_STR: &str = r#"{"kind":"token","payload":{"contract_id":"foo.near","token_ids":["bar"],"refresh":null,"minter":"foo.near"}}"#;
