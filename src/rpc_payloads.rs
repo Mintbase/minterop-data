@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+type RoyaltiesMap = std::collections::HashMap<String, u16>;
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
 #[serde(tag = "kind", content = "payload")]
@@ -22,7 +24,8 @@ pub enum RpcMessage {
         metadata_id: u64,
         minters_allowlist: Option<Vec<String>>,
         price: String,
-        royalties: Option<serde_json::Value>,
+        royalties: Option<RoyaltiesMap>,
+        royalty_percent: Option<u16>,
         max_supply: Option<u32>,
         last_possible_mint: Option<u64>,
         is_locked: bool,
@@ -64,7 +67,8 @@ impl RpcMessage {
         metadata_id: u64,
         minters_allowlist: Option<Vec<String>>,
         price: u128,
-        royalties: Option<serde_json::Value>,
+        royalties: Option<RoyaltiesMap>,
+        royalty_percent: Option<u16>,
         max_supply: Option<u32>,
         last_possible_mint: Option<u64>,
         is_locked: bool,
@@ -75,6 +79,7 @@ impl RpcMessage {
             metadata_id,
             minters_allowlist,
             royalties,
+            royalty_percent,
             max_supply,
             last_possible_mint,
             is_locked,
