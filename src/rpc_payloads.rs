@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
@@ -22,9 +19,13 @@ pub enum RpcMessage {
     #[serde(rename = "metadata")]
     HandleMetadataPayload {
         contract_id: String,
-        metadata_id: String,
+        metadata_id: u64,
         minters_allowlist: Option<Vec<String>>,
         price: String,
+        royalties: Option<serde_json::Value>,
+        max_supply: Option<u32>,
+        last_possible_mint: Option<u64>,
+        is_locked: bool,
         refresh: Option<bool>,
         creator: String,
     },
@@ -64,11 +65,19 @@ impl RpcMessage {
         minters_allowlist: Option<Vec<String>>,
         price: u128,
         creator: String,
+        royalties: Option<serde_json::Value>,
+        max_supply: Option<u32>,
+        last_possible_mint: Option<u64>,
+        is_locked: bool,
     ) -> Self {
         Self::HandleMetadataPayload {
             contract_id,
-            metadata_id: metadata_id.to_string(),
+            metadata_id,
             minters_allowlist,
+            royalties,
+            max_supply,
+            last_possible_mint,
+            is_locked,
             price: price.to_string(),
             refresh: Some(false),
             creator,
@@ -94,8 +103,7 @@ impl RpcMessage {
 mod tests {
     use super::*;
     use crate::rpc_payloads::RpcMessage::{
-        HandleContractPayload,
-        HandleTokenPayload,
+        HandleContractPayload, HandleTokenPayload,
     };
     const CONTRACT_PAYLOAD_STR: &str = r#"{"kind":"contract","payload":{"contract_id":"foo.near","refresh":null}}"#;
     const TOKEN_PAYLOAD_STR: &str = r#"{"kind":"token","payload":{"contract_id":"foo.near","token_ids":["bar"],"refresh":null,"minter":"foo.near"}}"#;
