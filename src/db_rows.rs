@@ -58,7 +58,9 @@ impl NftToken {
     }
 }
 
-#[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]
+#[derive(
+    Default, Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset,
+)]
 #[table_name = "nft_metadata"]
 pub struct NftMetadata {
     pub id: String,
@@ -98,75 +100,15 @@ pub struct NftMetadata {
     pub is_locked: Option<bool>,
 }
 
-impl NftMetadata {
-    pub fn empty() -> Self {
-        NftMetadata {
-            id: "::".to_string(),
-            nft_contract_id: "".to_string(),
-            reference_blob: None,
-            title: None,
-            description: None,
-            media: None,
-            media_hash: None,
-            reference: None,
-            reference_hash: None,
-            // media_size: None,
-            // animation_url: None,
-            // animation_hash: None,
-            // animation_size: None,
-            // youtube_url: None,
-            // document_url: None,
-            // document_hash: None,
-            // external_url: None,
-            // category: None,
-            // type_: None,
-            // visibility: None,
-            // media_type: None,
-            // animation_type: None,
-            // tags: None,
-            // copies: None,
-            // issued_at: None,
-            // expires_at: None,
-            // starts_at: None,
-            // updated_at: None,
-            extra: None,
-            minter: None,   // FIXME: make sure this is always added
-            base_uri: None, // FIXME: make sure this is always added
-            mb_internal_id: None,
-            price: None,
-            minters_allowlist: None,
-            royalties: None,
-            royalty_percent: None,
-            max_supply: None,
-            last_possible_mint: None,
-            is_locked: None,
-        }
-    }
-
-    // fn from_blob(blob: serde_json::Value) -> Option<Self> {}
-}
-
-#[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]
+#[derive(
+    Default, Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset,
+)]
 pub struct NftAttribute {
     pub nft_metadata_id: String,
     pub nft_contract_id: String,
     pub attribute_type: String,
     pub attribute_value: Option<String>,
     pub attribute_display_type: Option<String>,
-}
-
-impl NftAttribute {
-    pub fn empty() -> Self {
-        NftAttribute {
-            nft_metadata_id: "".to_string(),
-            nft_contract_id: "".to_string(),
-            attribute_type: "".to_string(),
-            attribute_value: None,
-            attribute_display_type: None,
-        }
-    }
-
-    // fn from_blob(blob: serde_json::Value) -> Option<Self> {}
 }
 
 #[derive(diesel::Insertable, diesel::Queryable, diesel::AsChangeset, Clone)]
