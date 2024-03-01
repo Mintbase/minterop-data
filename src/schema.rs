@@ -176,7 +176,7 @@ diesel::table! {
         royalties -> Nullable<Jsonb>,
         royalty_percent -> Nullable<Numeric>,
         max_supply -> Nullable<Numeric>,
-        last_possible_mint -> Nullable<Numeric>,
+        last_possible_mint -> Nullable<Timestamp>,
         is_locked -> Nullable<Bool>,
     }
 }

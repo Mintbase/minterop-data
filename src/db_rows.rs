@@ -91,6 +91,11 @@ pub struct NftMetadata {
     pub mb_internal_id: Option<BigDecimal>,
     pub price: Option<BigDecimal>,
     pub minters_allowlist: Option<Vec<String>>,
+    pub royalties: Option<serde_json::Value>,
+    pub royalty_percent: Option<BigDecimal>,
+    pub max_supply: Option<BigDecimal>,
+    pub last_possible_mint: Option<NaiveDateTime>,
+    pub is_locked: Option<bool>,
 }
 
 impl NftMetadata {
@@ -130,6 +135,11 @@ impl NftMetadata {
             mb_internal_id: None,
             price: None,
             minters_allowlist: None,
+            royalties: None,
+            royalty_percent: None,
+            max_supply: None,
+            last_possible_mint: None,
+            is_locked: None,
         }
     }
 
