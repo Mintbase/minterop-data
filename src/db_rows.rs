@@ -3,7 +3,7 @@ use chrono::NaiveDateTime;
 
 // ----------------------- core/interop functionality ----------------------- //
 use crate::schema::*;
-#[derive(diesel::Insertable, diesel::Queryable, Clone)]
+#[derive(Clone, Default, diesel::Insertable, diesel::Queryable)]
 pub struct NftToken {
     pub token_id: String,
     pub nft_contract_id: String,
@@ -27,35 +27,6 @@ pub struct NftToken {
     pub royalties_percent: Option<i32>,
     pub royalties: Option<serde_json::Value>,
     pub splits: Option<serde_json::Value>,
-}
-
-impl NftToken {
-    pub fn empty() -> Self {
-        NftToken {
-            token_id: "".to_string(),
-            nft_contract_id: "".to_string(),
-            owner: "".to_string(),
-            mint_memo: None,
-            last_transfer_timestamp: None,
-            last_transfer_receipt_id: None,
-            minted_timestamp: None,
-            minted_receipt_id: None,
-            burned_timestamp: None,
-            burned_receipt_id: None,
-            minter: None,
-            reference: None,
-            reference_hash: None,
-            copies: None,
-            issued_at: None,
-            expires_at: None,
-            starts_at: None,
-            updated_at: None,
-            metadata_id: None,
-            royalties_percent: None,
-            royalties: None,
-            splits: None,
-        }
-    }
 }
 
 #[derive(
@@ -100,9 +71,7 @@ pub struct NftMetadata {
     pub is_locked: Option<bool>,
 }
 
-#[derive(
-    Default, Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset,
-)]
+#[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]
 pub struct NftAttribute {
     pub nft_metadata_id: String,
     pub nft_contract_id: String,
