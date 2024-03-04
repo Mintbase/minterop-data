@@ -43,5 +43,6 @@ select_permissions:
         - max_supply
         - last_possible_mint
         - is_locked
+        - is_active
       filter: {}
       allow_aggregations: true

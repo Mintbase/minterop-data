@@ -178,6 +178,7 @@ diesel::table! {
         max_supply -> Nullable<Numeric>,
         last_possible_mint -> Nullable<Timestamp>,
         is_locked -> Nullable<Bool>,
+        is_active -> Bool,
     }
 }
 
