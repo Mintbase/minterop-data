@@ -173,6 +173,11 @@ diesel::table! {
         mb_internal_id -> Nullable<Numeric>,
         price -> Nullable<Numeric>,
         minters_allowlist -> Nullable<Array<Nullable<Text>>>,
+        royalties -> Nullable<Jsonb>,
+        royalty_percent -> Nullable<Numeric>,
+        max_supply -> Nullable<Numeric>,
+        last_possible_mint -> Nullable<Timestamp>,
+        is_locked -> Nullable<Bool>,
     }
 }
 

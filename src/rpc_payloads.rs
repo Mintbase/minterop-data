@@ -3,6 +3,8 @@ use serde::{
     Serialize,
 };
 
+type RoyaltiesMap = std::collections::HashMap<String, u16>;
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[cfg_attr(test, derive(PartialEq))]
 #[serde(tag = "kind", content = "payload")]
@@ -22,9 +24,14 @@ pub enum RpcMessage {
     #[serde(rename = "metadata")]
     HandleMetadataPayload {
         contract_id: String,
-        metadata_id: String,
+        metadata_id: u64,
         minters_allowlist: Option<Vec<String>>,
         price: String,
+        royalties: Option<RoyaltiesMap>,
+        royalty_percent: Option<u16>,
+        max_supply: Option<u32>,
+        last_possible_mint: Option<u64>,
+        is_locked: bool,
         refresh: Option<bool>,
         creator: String,
     },
@@ -35,59 +42,6 @@ pub enum RpcMessage {
         new_owner_id: String,
         receipt_id: String,
     },
-}
-
-impl RpcMessage {
-    pub fn from_contract(contract_id: String, update: bool) -> Self {
-        Self::HandleContractPayload {
-            contract_id,
-            refresh: Some(update),
-        }
-    }
-
-    pub fn from_token(
-        contract_id: String,
-        token_ids: Vec<String>,
-        minter: Option<String>,
-    ) -> Self {
-        Self::HandleTokenPayload {
-            contract_id,
-            token_ids,
-            refresh: Some(false),
-            minter,
-        }
-    }
-
-    pub fn from_metadata(
-        contract_id: String,
-        metadata_id: u64,
-        minters_allowlist: Option<Vec<String>>,
-        price: u128,
-        creator: String,
-    ) -> Self {
-        Self::HandleMetadataPayload {
-            contract_id,
-            metadata_id: metadata_id.to_string(),
-            minters_allowlist,
-            price: price.to_string(),
-            refresh: Some(false),
-            creator,
-        }
-    }
-
-    pub fn from_sale(
-        contract_id: String,
-        token_id: String,
-        new_owner_id: String,
-        receipt_id: String,
-    ) -> Self {
-        Self::HandleSalePayload {
-            contract_id,
-            token_id,
-            new_owner_id,
-            receipt_id,
-        }
-    }
 }
 
 #[cfg(test)]

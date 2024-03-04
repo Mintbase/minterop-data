@@ -38,5 +38,10 @@ select_permissions:
         - mb_internal_id
         - price
         - minters_allowlist
+        - royalties
+        - royalty_percent
+        - max_supply
+        - last_possible_mint
+        - is_locked
       filter: {}
       allow_aggregations: true
