@@ -69,6 +69,7 @@ pub struct NftMetadata {
     pub max_supply: Option<BigDecimal>,
     pub last_possible_mint: Option<NaiveDateTime>,
     pub is_locked: Option<bool>,
+    pub is_active: bool,
 }
 
 #[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]
