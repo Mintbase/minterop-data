@@ -70,6 +70,7 @@ pub struct NftMetadata {
     pub last_possible_mint: Option<NaiveDateTime>,
     pub is_locked: Option<bool>,
     pub is_active: bool,
+    pub ft_contract_id: Option<String>,
 }
 
 #[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]

@@ -27,6 +27,7 @@ pub enum RpcMessage {
         metadata_id: u64,
         minters_allowlist: Option<Vec<String>>,
         price: String,
+        ft_contract_id: Option<String>,
         royalties: Option<RoyaltiesMap>,
         royalty_percent: Option<u16>,
         max_supply: Option<u32>,

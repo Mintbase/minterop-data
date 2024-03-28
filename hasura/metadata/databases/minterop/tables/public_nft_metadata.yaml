@@ -37,6 +37,7 @@ select_permissions:
         - content_flag
         - mb_internal_id
         - price
+        - ft_contract_id
         - minters_allowlist
         - royalties
         - royalty_percent

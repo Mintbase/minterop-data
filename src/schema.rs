@@ -179,6 +179,7 @@ diesel::table! {
         last_possible_mint -> Nullable<Timestamp>,
         is_locked -> Nullable<Bool>,
         is_active -> Bool,
+        ft_contract_id -> Nullable<Text>,
     }
 }
 
