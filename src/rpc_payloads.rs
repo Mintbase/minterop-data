@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 type RoyaltiesMap = std::collections::HashMap<String, u16>;
 
@@ -31,7 +28,8 @@ pub enum RpcMessage {
         royalties: Option<RoyaltiesMap>,
         royalty_percent: Option<u16>,
         max_supply: Option<u32>,
-        last_possible_mint: Option<u64>,
+        starts_at: Option<u64>,
+        expires_at: Option<u64>,
         is_locked: bool,
         refresh: Option<bool>,
         creator: String,
@@ -49,8 +47,7 @@ pub enum RpcMessage {
 mod tests {
     use super::*;
     use crate::rpc_payloads::RpcMessage::{
-        HandleContractPayload,
-        HandleTokenPayload,
+        HandleContractPayload, HandleTokenPayload,
     };
     const CONTRACT_PAYLOAD_STR: &str = r#"{"kind":"contract","payload":{"contract_id":"foo.near","refresh":null}}"#;
     const TOKEN_PAYLOAD_STR: &str = r#"{"kind":"token","payload":{"contract_id":"foo.near","token_ids":["bar"],"refresh":null,"minter":"foo.near"}}"#;

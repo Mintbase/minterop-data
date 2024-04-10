@@ -42,7 +42,8 @@ select_permissions:
         - royalties
         - royalty_percent
         - max_supply
-        - last_possible_mint
+        - starts_at
+        - expires_at
         - is_locked
         - is_active
       filter: {}
