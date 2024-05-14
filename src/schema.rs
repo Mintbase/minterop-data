@@ -181,6 +181,7 @@ diesel::table! {
         ft_contract_id -> Nullable<Text>,
         starts_at -> Nullable<Timestamp>,
         expires_at -> Nullable<Timestamp>,
+        unique_minters -> Nullable<Bool>,
     }
 }
 
