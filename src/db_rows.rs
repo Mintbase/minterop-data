@@ -72,6 +72,7 @@ pub struct NftMetadata {
     pub is_locked: Option<bool>,
     pub is_active: bool,
     pub ft_contract_id: Option<String>,
+    pub unique_minters: Option<bool>,
 }
 
 #[derive(Clone, diesel::Insertable, diesel::Queryable, diesel::AsChangeset)]
