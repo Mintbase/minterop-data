@@ -35,7 +35,7 @@ select_permissions:
         - media
         - reference
         - reference_blob
-        - minter as creator
+        - creator
         - max_supply
         - minted
         - royalties
