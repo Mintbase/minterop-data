@@ -1,0 +1,49 @@
+table:
+  schema: mb_views
+  name: nft_drops
+array_relationships:
+  - name: listings
+    using:
+      manual_configuration:
+        column_mapping:
+          id: indexer_metadata_id
+          nft_contract_id: nft_contract_id
+        insertion_order: null
+        remote_table:
+          name: active_listings
+          schema: mb_views
+object_relationships:
+  - name: nft_contract
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: nft_contracts
+        insertion_order: null
+        column_mapping:
+          nft_contract_id: id
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - drop_url,
+        - nft_contract_id,
+        - sc_metadata_id,
+        - indexer_metadata_id,
+        - title
+        - description
+        - media
+        - reference
+        - reference_blob
+        - minter as creator
+        - max_supply
+        - minted
+        - royalties
+        - royalty_percent
+        - price
+        - minters_allowlist
+        - unique_minters
+        - starts_at
+        - expires_at
+      filter: {}
+      allow_aggregations: true
