@@ -6,7 +6,7 @@ array_relationships:
     using:
       manual_configuration:
         column_mapping:
-          id: indexer_metadata_id
+          indexer_metadata_id: metadata_id
           nft_contract_id: nft_contract_id
         insertion_order: null
         remote_table:
