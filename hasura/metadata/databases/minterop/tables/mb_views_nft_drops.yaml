@@ -26,10 +26,10 @@ select_permissions:
   - role: anonymous
     permission:
       columns:
-        - drop_url,
-        - nft_contract_id,
-        - sc_metadata_id,
-        - indexer_metadata_id,
+        - drop_url
+        - nft_contract_id
+        - sc_metadata_id
+        - indexer_metadata_id
         - title
         - description
         - media
