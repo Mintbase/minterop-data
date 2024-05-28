@@ -1,6 +1,6 @@
 table:
   schema: mb_views
-  name: nft_metadata
+  name: nft_drops
 array_relationships:
   - name: listings
     using:
